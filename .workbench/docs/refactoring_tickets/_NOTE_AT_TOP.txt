@@ -1,0 +1,13 @@
+⚠️ READ THIS FIRST ⚠️
+
+Path references in tickets 100-600 use CURRENT (flat) structure.
+
+If you execute 002-[STRUCT]-00 first:
+  → See 000-PATH-NOTES.md for path mappings
+  → Mentally translate: database/ → api/db/, etc.
+
+Quick map:
+  database/ → api/db/
+  btree/ → store/btree/
+  concurrent/ → process/locks/
+  (see 000-PATH-NOTES.md for full list)
