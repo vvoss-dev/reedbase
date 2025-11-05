@@ -11,13 +11,16 @@
 
 | Phase | Tickets | Status | Progress |
 |-------|---------|--------|----------|
-| **Preparation** | FIX-001 | ⏳ Not Started | 0/1 |
-| **Stufe 1: Tests** | TESTS-100 to 115 | ⏳ Not Started | 0/17 |
-| **Stufe 1: Rename** | RENAME-200 | ⏳ Not Started | 0/2 |
-| **Stufe 2: Split** | SPLIT-300 to 306 | ⏳ Not Started | 0/6 |
-| **Stufe 3: Verify** | VERIFY-600 | ⏳ Not Started | 0/1 |
-| **Final: Commit** | COMMIT-900 | ⏳ Not Started | 0/1 |
-| **TOTAL** | **28 tickets** | **0% complete** | **0/28** |
+| **Phase 0: Preparation** | 001-002 | ⏳ Not Started | 0/2 |
+| **Phase 1: Analysis** | 150, 210, 250 + subs | ⏳ Not Started | 0/13 |
+| **Phase 2: Test Extraction** | 100-117 | ⏳ Not Started | 0/18 |
+| **Phase 3: BBC English** | 151-154 | ⏳ Not Started | 0/4 |
+| **Phase 4: Rename/Audit** | 200, 211-213 | ⏳ Not Started | 0/4 |
+| **Phase 5: Function Refactor** | 251-253 + results | ⏳ Not Started | 0/3+ |
+| **Phase 6: File Splits** | 300-306 | ⏳ Not Started | 0/7 |
+| **Phase 7: Verification** | 600 | ⏳ Not Started | 0/1 |
+| **Phase 8: Launch** | 900 | ⏳ Not Started | 0/1 |
+| **TOTAL** | **43+ tickets** | **0% complete** | **0/43+** |
 
 ---
 
@@ -47,105 +50,166 @@ COMMIT-900 (squash & launch)
 
 | Ticket | Title | Priority | Effort | Status | Notes |
 |--------|-------|----------|--------|--------|-------|
-| **FIX-001-00** | Fix test registry setup | CRITICAL | 30m | ⏳ Not Started | 27 tests failing, blocks everything |
+| **001-[PREP]-00** | Fix test registry setup | CRITICAL | 30m | ⏳ Not Started | 27 tests failing, blocks everything |
+| **002-[STRUCT]-00** | Reorganise folders | OPTIONAL | 1h | ⏳ Not Started | Creates api/store/validate/process/ops structure |
 
 **Why Critical**: Can't refactor if tests don't pass. Must fix first.
 
 ---
 
+### 📊 Phase 1: Analysis (Find All Violations)
+
+| Ticket | Title | Effort | Status | Finds |
+|--------|-------|--------|--------|-------|
+| **150-[LANG]-00** | BBC English audit (parent) | 1h | ⏳ Not Started | American spellings |
+| **151-[LANG]-01** | Fix -ize endings | 20m | ⏳ Not Started | initialize, optimize, etc. |
+| **152-[LANG]-02** | Fix -yze endings | 10m | ⏳ Not Started | analyze, etc. |
+| **153-[LANG]-03** | Fix -or endings | 10m | ⏳ Not Started | color, behavior, etc. |
+| **154-[LANG]-04** | Fix -er endings | 10m | ⏳ Not Started | center, meter, etc. |
+| **210-[AUDIT]-00** | Generic names audit (parent) | 30m | ⏳ Not Started | helpers.rs, utils.rs, etc. |
+| **211-[AUDIT]-01** | Find helpers/utils/common | 15m | ⏳ Not Started | Generic filenames |
+| **212-[AUDIT]-02** | Audit types.rs files | 15m | ⏳ Not Started | Large types.rs (>200 lines) |
+| **213-[AUDIT]-03** | Audit mod.rs files | 10m | ⏳ Not Started | mod.rs with logic (>50 lines) |
+| **250-[FUNC]-00** | Function analysis (parent) | 2-3h | ⏳ Not Started | Swiss Army knife functions |
+| **251-[FUNC]-01** | Find long functions | 30m | ⏳ Not Started | Functions >100 lines |
+| **252-[FUNC]-02** | Find complex signatures | 20m | ⏳ Not Started | Functions with >5 params |
+| **253-[FUNC]-03** | Find vague names | 20m | ⏳ Not Started | handle/process/manage names |
+
+**Subtotal**: 13 tickets, ~3 hours
+
+**Output**: Analysis reports identifying all violations → feeding into fix tickets
+
+---
+
 ### ✅ Stufe 1: Non-Breaking Cleanup
 
-#### Test Extraction (TESTS-100 series)
+### ✅ Phase 2: Test Extraction (MANDATORY - Standard #5)
 
 | Ticket | File | Lines | Effort | Status |
 |--------|------|-------|--------|--------|
-| TESTS-100-00 | Overview | - | - | ⏳ Not Started |
-| TESTS-101-00 | database/types.rs | 570 | 10m | ⏳ Not Started |
-| TESTS-102-00 | database/execute.rs | 661 | 10m | ⏳ Not Started |
-| TESTS-103-00 | database/query.rs | 387 | 10m | ⏳ Not Started |
-| TESTS-104-00 | database/index.rs | 532 | 10m | ⏳ Not Started |
-| TESTS-105-00 | database/stats.rs | 200 | 10m | ⏳ Not Started |
-| TESTS-106-00 | reedql/types.rs | 483 | 10m | ⏳ Not Started |
-| TESTS-107-00 | reedql/executor.rs | 697 | 10m | ⏳ Not Started |
-| TESTS-108-00 | merge/types.rs | 200 | 10m | ⏳ Not Started |
-| TESTS-109-00 | conflict/types.rs | 404 | 10m | ⏳ Not Started |
-| TESTS-110-00 | schema/types.rs | 306 | 10m | ⏳ Not Started |
-| TESTS-111-00 | btree/page.rs | 669 | 10m | ⏳ Not Started |
-| TESTS-112-00 | btree/types.rs | 150 | 10m | ⏳ Not Started |
-| TESTS-113-00 | version/rebuild.rs | 200 | 10m | ⏳ Not Started |
-| TESTS-114-00 | concurrent/types.rs | 100 | 10m | ⏳ Not Started |
-| TESTS-115-00 | Remaining files | Varies | 30m | ⏳ Not Started |
+| **100-[TESTS]-00** | Overview (parent) | - | - | ⏳ Not Started |
+| **101-[TESTS]-00** | database/types.rs | 570 | 10m | ⏳ Not Started |
+| **102-[TESTS]-00** | database/execute.rs | 661 | 10m | ⏳ Not Started |
+| **103-[TESTS]-00** | database/query.rs | 387 | 10m | ⏳ Not Started |
+| **104-[TESTS]-00** | database/index.rs | 532 | 10m | ⏳ Not Started |
+| **105-[TESTS]-00** | database/stats.rs | 200 | 10m | ⏳ Not Started |
+| **106-[TESTS]-00** | reedql/types.rs | 483 | 10m | ⏳ Not Started |
+| **107-[TESTS]-00** | reedql/executor.rs | 697 | 10m | ⏳ Not Started |
+| **108-[TESTS]-00** | merge/types.rs | 200 | 10m | ⏳ Not Started |
+| **109-[TESTS]-00** | conflict/types.rs | 404 | 10m | ⏳ Not Started |
+| **110-[TESTS]-00** | schema/types.rs | 306 | 10m | ⏳ Not Started |
+| **111-[TESTS]-00** | btree/page.rs | 669 | 10m | ⏳ Not Started |
+| **112-[TESTS]-00** | btree/types.rs | 150 | 10m | ⏳ Not Started |
+| **113-[TESTS]-00** | version/rebuild.rs | 200 | 10m | ⏳ Not Started |
+| **114-[TESTS]-00** | concurrent/types.rs | 100 | 10m | ⏳ Not Started |
+| **115-[TESTS]-00** | reedql/parser.rs | 730 | 10m | ⏳ Not Started |
+| **116-[TESTS]-00** | tables/ops.rs | 300 | 10m | ⏳ Not Started |
+| **117-[TESTS]-00** | indices/builder.rs | 400 | 10m | ⏳ Not Started |
 
-**Subtotal**: 17 files, ~2.5 hours
-
-#### File Renaming (RENAME-200 series)
-
-| Ticket | File | New Name | Effort | Status |
-|--------|------|----------|--------|--------|
-| RENAME-200-00 | tables/helpers.rs | table_operations.rs | 15m | ⏳ Not Started |
-| RENAME-200-00 | indices/builder_tests.rs | builder_test.rs | 5m | ⏳ Not Started |
-
-**Subtotal**: 2 files, ~30 minutes
+**Subtotal**: 18 tickets (1 parent + 17 files), ~2.5 hours
 
 ---
 
-### 🔄 Stufe 2: File Splitting
+### 🔤 Phase 3: BBC English Fixes (MANDATORY - Standard #1)
+
+Already covered by Phase 1 (151-154), executed after analysis.
+
+---
+
+### 📁 Phase 4: File Renaming & Audit (MANDATORY - Standards #3 & #7)
+
+| Ticket | File | Action | Effort | Status |
+|--------|------|--------|--------|--------|
+| **200-[RENAME]-00** | tables/helpers.rs | → table_operations.rs | 15m | ⏳ Not Started |
+| **200-[RENAME]-00** | indices/builder_tests.rs | → builder_test.rs | 5m | ⏳ Not Started |
+
+**Plus results from 211-213** (found during audit) - TBD
+
+**Subtotal**: 4+ tickets, ~1 hour
+
+---
+
+### ⚙️ Phase 5: Function Refactoring (Standards #4 & #6)
+
+Results from 251-253 analysis will generate additional tickets.
+
+**Estimated**: 5-10 function refactoring tickets @ 30-60 min each = 3-5 hours
+
+---
+
+### 📂 Phase 6: File Splits (Standard #2 - KISS)
+
+---
 
 | Ticket | File | Lines | New Files | Effort | Priority | Status |
 |--------|------|-------|-----------|--------|----------|--------|
-| SPLIT-300-00 | Overview | - | - | - | - | ⏳ Not Started |
-| SPLIT-301-00 | btree/tree.rs | 782 | 5 files | 2h | CRITICAL | ⏳ Not Started |
-| SPLIT-302-00 | reedql/parser.rs | 730 | 4 files | 1.5h | CRITICAL | ⏳ Not Started |
-| SPLIT-303-00 | reedql/executor.rs | 697 | 3 files | 1h | HIGH | ⏳ Not Started |
-| SPLIT-304-00 | btree/page.rs | 669 | 2 files | 1h | HIGH | ⏳ Not Started |
-| SPLIT-305-00 | database/execute.rs | 661 | 4 files | 1h | MEDIUM | ⏳ Not Started |
-| SPLIT-306-00 | bin/formatters/mod.rs | 177 | 4 files | 30m | LOW | ⏳ Not Started |
+| **300-[SPLIT]-00** | Overview (parent) | - | - | - | - | ⏳ Not Started |
+| **301-[SPLIT]-00** | btree/tree.rs | 782 | 5 files | 2h | CRITICAL | ⏳ Not Started |
+| **302-[SPLIT]-00** | reedql/parser.rs | 730 | 4 files | 1.5h | CRITICAL | ⏳ Not Started |
+| **303-[SPLIT]-00** | reedql/executor.rs | 697 | 3 files | 1h | HIGH | ⏳ Not Started |
+| **304-[SPLIT]-00** | btree/page.rs | 669 | 2 files | 1h | HIGH | ⏳ Not Started |
+| **305-[SPLIT]-00** | database/execute.rs | 661 | 4 files | 1h | MEDIUM | ⏳ Not Started |
+| **306-[SPLIT]-00** | bin/formatters/mod.rs | 177 | 4 files | 30m | LOW | ⏳ Not Started |
 
-**Subtotal**: 6 files → ~22 new files, ~7 hours
+**Subtotal**: 7 tickets (1 parent + 6 splits), ~7 hours
 
-**Note**: Can potentially skip SPLIT-305 and SPLIT-306 if time constrained (MEDIUM/LOW priority).
+**Note**: Can skip 305-306 if time constrained (MEDIUM/LOW priority).
 
 ---
 
-### ✓ Stufe 3: Verification & Launch
+### ✅ Phase 7: Verification & Quality Gate
 
 | Ticket | Title | Effort | Status |
 |--------|-------|--------|--------|
-| VERIFY-600-00 | Final verification checklist | 1h | ⏳ Not Started |
-| COMMIT-900-00 | Squash commits & launch | 15m | ⏳ Not Started |
+| **600-[VERIFY]-00** | Final verification checklist | 1h | ⏳ Not Started |
 
-**Subtotal**: ~1.25 hours
+**Checks all 7 CLAUDE.md standards** before launch.
 
 ---
 
-## Time Estimates
+### 🚀 Phase 8: Launch
 
-### Minimum (Skip optional splits)
-- FIX-001: 30m
-- TESTS-100 series: 2.5h
-- RENAME-200: 30m
-- SPLIT-301, SPLIT-302 (critical only): 3.5h
-- VERIFY-600: 1h
-- COMMIT-900: 15m
-- **Total: ~8 hours**
+| Ticket | Title | Effort | Status |
+|--------|-------|--------|--------|
+| **900-[LAUNCH]-00** | Squash commits & launch | 15m | ⏳ Not Started |
 
-### Full (All splits)
-- FIX-001: 30m
-- TESTS-100 series: 2.5h
-- RENAME-200: 30m
-- SPLIT-300 series (all): 7h
-- VERIFY-600: 1h
-- COMMIT-900: 15m
-- **Total: ~11.75 hours**
+**Final clean commit** and push to GitHub.
 
-### Recommended (High priority only)
-- FIX-001: 30m
-- TESTS-100 series: 2.5h
-- RENAME-200: 30m
-- SPLIT-301, SPLIT-302, SPLIT-303, SPLIT-304: 5.5h
-- VERIFY-600: 1h
-- COMMIT-900: 15m
+---
+
+## Time Estimates (Updated with Sub-Tickets)
+
+### 📊 Phase-by-Phase Breakdown
+
+| Phase | Tasks | Effort | Can Skip? |
+|-------|-------|--------|-----------|
+| **Phase 0** | Fix tests + folder reorg | 1.5h | ❌ Tests MANDATORY |
+| **Phase 1** | Analysis (find all violations) | 3h | ❌ MANDATORY |
+| **Phase 2** | Extract 17 inline tests | 2.5h | ❌ MANDATORY |
+| **Phase 3** | BBC English fixes | 1h | ❌ MANDATORY |
+| **Phase 4** | Rename generic files + audit results | 1h | ❌ MANDATORY |
+| **Phase 5** | Function refactoring | 3-5h | ⚠️ Partial skip possible |
+| **Phase 6** | File splits (6 files) | 7h | ⚠️ Can skip 305-306 |
+| **Phase 7** | Verification | 1h | ❌ MANDATORY |
+| **Phase 8** | Launch | 15m | ❌ MANDATORY |
+
+### 🎯 Execution Scenarios
+
+**Minimum (MANDATORY only)**:
+- Phase 0-4, 7-8 (skip function refactor + file splits)
 - **Total: ~10 hours**
+- ⚠️ Warning: May not pass full CLAUDE.md compliance
+
+**Recommended (High value)**:
+- Phase 0-4, 7-8 + critical file splits (301-304)
+- **Total: ~15 hours**
+- ✅ Good CLAUDE.md compliance
+
+**Full (Exemplary codebase)**:
+- All phases, all tickets
+- **Total: ~20 hours**
+- ✅ 100% CLAUDE.md compliance
+- 🏆 "Mustergültig" quality
 
 ---
 
