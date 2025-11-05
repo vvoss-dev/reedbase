@@ -4,17 +4,32 @@
 
 Diese Reihenfolge löst ALLE Kohärenz-Probleme:
 
-### Phase 0: Vorbereitung
+### Phase 0: Vorbereitung & Foundation
 ```
-001-[PREP]-00   Fix failing tests (MUST DO FIRST!)
+050-[REUSE]-00  Architecture & Redundancy Audit (CRITICAL FIRST!)
+    ↓ Creates core/ module, eliminates duplicates, establishes architecture
+    ↓ Output: Consolidation plan + sub-tickets (051-07X)
+    ↓
+051-07X         Execute consolidation sub-tickets (from 050 analysis)
+    ↓ Centralise paths, validation, eliminate duplicates
+    ↓ Result: 100% redundancy-free codebase with core/ module
+    ↓
+001-[PREP]-00   Fix failing tests (after redundancy elimination)
     ↓
 002-[STRUCT]-00 Folder reorganisation (DO NOW - before everything else!)
     ↓
-    (Ab jetzt arbeiten ALLE Tickets mit finaler Struktur)
+    (Ab jetzt arbeiten ALLE Tickets mit finaler Struktur + core/)
 ```
 
-**Warum 002 jetzt?**
-- ✅ Alle nachfolgenden Tickets arbeiten mit `api/db/`, `store/btree/` etc.
+**Warum 050 ZUERST?**
+- ✅ **CRITICAL**: Establishes core/ module for default functions
+- ✅ **CRITICAL**: Eliminates redundancy BEFORE other refactoring
+- ✅ **CRITICAL**: Validates NO MVC architecture
+- ✅ Prevents re-creating duplicates during other refactoring
+- ✅ Clear module boundaries before folder restructure
+
+**Warum 002 nach 050?**
+- ✅ Alle nachfolgenden Tickets arbeiten mit `api/db/`, `store/btree/`, `core/` etc.
 - ✅ Keine duale Pfad-Verwirrung mehr
 - ✅ Einmalige Import-Update-Arbeit, dann fertig
 
