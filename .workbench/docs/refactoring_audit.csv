@@ -1,0 +1,35 @@
+file_path|lines|issues|severity|proposed_action|new_path|breaking_changes|effort|priority
+src/metrics/mod.rs|96|Logic in mod.rs (96 lines)|Medium|Keep as-is - re-exports complex types, acceptable|N/A|None|None|Low
+src/database/mod.rs|111|Logic in mod.rs (111 lines)|Medium|Keep as-is - re-exports complex types, acceptable|N/A|None|None|Low
+src/database/types.rs|570|Large file, inline tests|High|Extract inline tests to database/types_test.rs|N/A|None|Low|High
+src/database/execute.rs|661|Large file (661 lines), inline tests|High|Extract inline tests, consider splitting INSERT/UPDATE/DELETE|src/database/insert.rs + update.rs + delete.rs|Internal only|High|Medium
+src/database/query.rs|387|Inline tests|Medium|Extract inline tests to database/query_test.rs|N/A|None|Low|High
+src/database/index.rs|532|Large file, inline tests|High|Extract inline tests to database/index_test.rs|N/A|None|Low|High
+src/database/stats.rs|200|Inline tests|Medium|Extract inline tests to database/stats_test.rs|N/A|None|Low|High
+src/tables/mod.rs|61|Logic in mod.rs (61 lines)|Low|Keep as-is - re-exports, acceptable|N/A|None|None|Low
+src/tables/helpers.rs|200|Generic filename 'helpers'|High|Rename to table_operations.rs or table_utils.rs - be specific about what it does|src/tables/table_operations.rs|Import changes|Low|High
+src/indices/mod.rs|77|Logic in mod.rs (77 lines)|Medium|Keep as-is - re-exports complex index types|N/A|None|None|Low
+src/indices/builder_tests.rs|334|Test file without _test suffix|High|Already separate file, just wrong naming - rename to builder_test.rs|src/indices/builder_test.rs|None|Low|High
+src/reedql/mod.rs|83|Logic in mod.rs (83 lines)|Medium|Keep as-is - re-exports query types|N/A|None|None|Low
+src/reedql/types.rs|483|Inline tests|Medium|Extract inline tests to reedql/types_test.rs|N/A|None|Low|High
+src/reedql/executor.rs|697|Large file (697 lines), inline tests|High|Extract inline tests, consider splitting SELECT/INSERT/UPDATE/DELETE execution|src/reedql/executor_select.rs + executor_mutations.rs|Internal only|High|Medium
+src/reedql/parser.rs|730|Large file (730 lines), no tests visible|High|Consider splitting: parser_select.rs + parser_mutations.rs + parser_helpers.rs|Multiple files|Internal only|High|Low
+src/bin/formatters/mod.rs|177|Logic in mod.rs (177 lines)|Medium|Extract formatters to separate files: json_formatter.rs, table_formatter.rs, csv_formatter.rs|Multiple files|None|Medium|Medium
+src/merge/types.rs|200|Inline tests|Medium|Extract inline tests to merge/types_test.rs|N/A|None|Low|High
+src/merge/mod.rs|60|Logic in mod.rs (60 lines)|Low|Keep as-is - acceptable for small module|N/A|None|None|Low
+src/conflict/types.rs|404|Inline tests|Medium|Extract inline tests to conflict/types_test.rs|N/A|None|Low|High
+src/conflict/mod.rs|57|Logic in mod.rs (57 lines)|Low|Keep as-is - acceptable|N/A|None|None|Low
+src/schema/mod.rs|110|Logic in mod.rs (110 lines)|Medium|Keep as-is - complex type re-exports|N/A|None|None|Low
+src/schema/types.rs|306|Inline tests|Medium|Extract inline tests to schema/types_test.rs|N/A|None|Low|High
+src/btree/mod.rs|71|Logic in mod.rs (71 lines)|Medium|Keep as-is - B+-Tree public API|N/A|None|None|Low
+src/btree/tree.rs|782|Very large file (782 lines)|High|Consider splitting: tree.rs (core), tree_operations.rs (insert/delete/search), tree_maintenance.rs (balance/split)|Multiple files|Internal only|High|Low
+src/btree/page.rs|669|Large file (669 lines), inline tests|High|Extract inline tests to btree/page_test.rs, consider splitting page serialization|src/btree/page_test.rs + page_serialization.rs|Internal only|High|Medium
+src/btree/types.rs|150|Inline tests|Medium|Extract inline tests to btree/types_test.rs|N/A|None|Low|High
+src/version/mod.rs|25|Clean mod.rs|None|No issues - exemplary|N/A|None|None|None
+src/version/rebuild.rs|200|Inline tests|Medium|Extract inline tests to version/rebuild_test.rs|N/A|None|Low|High
+src/concurrent/types.rs|100|Inline tests|Medium|Extract inline tests to concurrent/types_test.rs|N/A|None|Low|High
+src/concurrent/mod.rs|30|Clean mod.rs|None|No issues - exemplary|N/A|None|None|None
+src/registry/mod.rs|50|Clean mod.rs|None|No issues - acceptable size|N/A|None|None|None
+src/functions/mod.rs|102|Logic in mod.rs (102 lines)|Medium|Keep as-is - function registry needs logic|N/A|None|None|Low
+src/log/mod.rs|30|Clean mod.rs|None|No issues - exemplary|N/A|None|None|None
+src/backup/mod.rs|25|Clean mod.rs|None|No issues - exemplary|N/A|None|None|None
