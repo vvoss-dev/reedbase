@@ -11,8 +11,18 @@
 ## Estimated Effort
 2 hours
 
+## Path References
+
+**⚠️ DUAL PATH NOTATION**:
+- **Current**: `src/btree/tree.rs` (before 002-[STRUCT]-00)
+- **After**: `src/store/btree/tree.rs` (after 002-[STRUCT]-00)
+
+Use current path if folder reorganisation not yet complete.
+
 ## Context
-`src/store/btree/tree.rs` is **782 lines** containing ALL B+-Tree operations:
+**File location**: `src/btree/tree.rs` (current) or `src/store/btree/tree.rs` (after 002)
+
+This file is **782 lines** containing ALL B+-Tree operations:
 - Tree struct + initialization
 - Search operations (get, range)
 - Insert operations (with node splitting)
@@ -24,7 +34,7 @@ This violates KISS principle - one file should have one clear responsibility.
 
 ## Current State
 
-**File**: `src/store/btree/tree.rs` (782 lines)
+**File**: `src/btree/tree.rs` (current) or `src/store/btree/tree.rs` (after 002) - 782 lines
 
 **Responsibilities** (identified by analyzing code):
 1. **Core struct** (~50 lines)
@@ -63,6 +73,19 @@ This violates KISS principle - one file should have one clear responsibility.
 
 ## Target State
 
+**Current paths** (before 002-[STRUCT]-00):
+```
+src/btree/
+├── tree.rs              # Core struct + initialization (~100 lines)
+├── tree_search.rs       # Search operations (~150 lines)
+├── tree_insert.rs       # Insert + split (~200 lines)
+├── tree_delete.rs       # Delete + merge (~200 lines)
+├── tree_maintenance.rs  # Balance, compact, stats (~150 lines)
+├── mod.rs               # Public API exports
+└── ... (other btree files)
+```
+
+**After 002-[STRUCT]-00** (relocated to store/):
 ```
 src/store/btree/
 ├── tree.rs              # Core struct + initialization (~100 lines)
@@ -95,14 +118,16 @@ let result = tree.get(key)?;
 ```
 
 ## Dependencies
-- **FIX-001-00**: Tests must pass
-- **TESTS-111-00**: btree/page.rs inline tests extracted first
+- **001-[PREP]-00**: Tests must pass
+- **111-[TESTS]-00**: btree/page.rs inline tests extracted first
 
 ## Implementation Steps
 
+**Note**: All commands use current path (`src/btree/`) or after-002 path (`src/store/btree/`) depending on when this ticket is executed.
+
 ### Step 1: Analyze and Mark Boundaries
 
-1. **Read through tree.rs completely**
+1. **Read through tree.rs completely** (in current or after-002 location)
    - Mark line ranges for each responsibility
    - Identify dependencies between functions
    - Note which functions call which
@@ -116,7 +141,7 @@ let result = tree.get(key)?;
 
 ### Step 2: Extract Search Operations (Easiest First)
 
-1. **Create `src/store/btree/tree_search.rs`**
+1. **Create tree_search.rs** (in `src/btree/` or `src/store/btree/`)
    ```rust
    // Copyright 2025 Vivian Voss. Licensed under the Apache License, Version 2.0.
    // SPDX-License-Identifier: Apache-2.0
@@ -170,7 +195,7 @@ let result = tree.get(key)?;
 
 ### Step 3: Extract Insert Operations
 
-1. **Create `src/store/btree/tree_insert.rs`**
+1. **Create tree_insert.rs** (in `src/btree/` or `src/store/btree/`)
    ```rust
    // Copyright 2025 Vivian Voss. Licensed under the Apache License, Version 2.0.
    // SPDX-License-Identifier: Apache-2.0
@@ -196,7 +221,7 @@ let result = tree.get(key)?;
 
 ### Step 4: Extract Delete Operations
 
-1. **Create `src/store/btree/tree_delete.rs`**
+1. **Create tree_delete.rs** (in `src/btree/` or `src/store/btree/`)
 2. **Move functions**:
    - `delete()`
    - `merge_nodes()`
@@ -205,7 +230,7 @@ let result = tree.get(key)?;
 
 ### Step 5: Extract Maintenance Operations
 
-1. **Create `src/store/btree/tree_maintenance.rs`**
+1. **Create tree_maintenance.rs** (in `src/btree/` or `src/store/btree/`)
 2. **Move functions**:
    - `balance()`
    - `compact()`
@@ -258,15 +283,24 @@ cargo bench --bench btree
 - [ ] mod.rs exports are correct
 
 ## Files Affected
-**Created**:
-- `src/store/btree/tree_search.rs` (~150 lines)
-- `src/store/btree/tree_insert.rs` (~200 lines)
-- `src/store/btree/tree_delete.rs` (~200 lines)
-- `src/store/btree/tree_maintenance.rs` (~150 lines)
 
-**Modified**:
-- `src/store/btree/tree.rs` (782 → ~100 lines)
-- `src/store/btree/mod.rs` (add new module declarations)
+**Created** (current paths before 002):
+- `src/btree/tree_search.rs` (~150 lines)
+- `src/btree/tree_insert.rs` (~200 lines)
+- `src/btree/tree_delete.rs` (~200 lines)
+- `src/btree/tree_maintenance.rs` (~150 lines)
+
+**Modified** (current paths before 002):
+- `src/btree/tree.rs` (782 → ~100 lines)
+- `src/btree/mod.rs` (add new module declarations)
+
+**After 002-[STRUCT]-00** (all in `src/store/btree/`):
+- `src/store/btree/tree_search.rs`
+- `src/store/btree/tree_insert.rs`
+- `src/store/btree/tree_delete.rs`
+- `src/store/btree/tree_maintenance.rs`
+- `src/store/btree/tree.rs` (reduced)
+- `src/store/btree/mod.rs` (updated)
 
 **Unchanged** (public API):
 - External imports: `use reedbase::btree::BPlusTree` still works

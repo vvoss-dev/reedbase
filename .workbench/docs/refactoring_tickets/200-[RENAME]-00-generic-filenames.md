@@ -11,17 +11,27 @@
 ## Estimated Effort
 30 minutes
 
+## Path References
+
+**⚠️ DUAL PATH NOTATION**:
+- **Current**: `src/tables/` (before 002-[STRUCT]-00)
+- **After**: `src/store/tables/` (after 002-[STRUCT]-00)
+
+Use current paths if structure not yet reorganised.
+
 ## Context
 CLAUDE.md requires:
 > **7. Avoid**: Generic names like `handler.rs`, `middleware.rs`, `utils.rs`
 
 Found **2 violations**:
-1. `src/store/tables/helpers.rs` - vague "helpers" name
-2. `src/store/indices/builder_tests.rs` - wrong naming convention (should be `builder_test.rs`)
+1. **Current**: `src/tables/helpers.rs` → **After 002**: `src/store/tables/helpers.rs`
+2. **Current**: `src/indices/builder_tests.rs` → **After 002**: `src/store/indices/builder_tests.rs`
 
 ## Current State
 
-### File 1: `src/store/tables/helpers.rs` (200 lines)
+### File 1: `helpers.rs` (200 lines)
+- **Current**: `src/tables/helpers.rs`
+- **After 002**: `src/store/tables/helpers.rs`
 **Functions**:
 - `list_tables()` - List all tables in database
 - `table_exists()` - Check if table exists
@@ -31,7 +41,9 @@ Found **2 violations**:
 
 **Recommendation**: `table_operations.rs` (clearest about what it does)
 
-### File 2: `src/store/indices/builder_tests.rs` (334 lines)
+### File 2: `builder_tests.rs` (334 lines)
+- **Current**: `src/indices/builder_tests.rs`
+- **After 002**: `src/store/indices/builder_tests.rs`
 **Issue**: Naming convention inconsistency
 - All other test files: `{name}_test.rs`
 - This file: `{name}_tests.rs` (plural)
@@ -40,14 +52,27 @@ Found **2 violations**:
 
 ## Target State
 
+**Current paths** (before 002-[STRUCT]-00):
 ```
-src/store/tables/
+src/tables/
 ├── table_operations.rs     # Renamed from helpers.rs
 ├── table_operations_test.rs # Already exists as helpers_test.rs, rename too
 └── ...
 
-src/store/indices/
+src/indices/
 ├── builder_test.rs         # Renamed from builder_tests.rs
+└── ...
+```
+
+**After 002-[STRUCT]-00** (relocated to store/):
+```
+src/store/tables/
+├── table_operations.rs
+├── table_operations_test.rs
+└── ...
+
+src/store/indices/
+├── builder_test.rs
 └── ...
 ```
 
@@ -66,14 +91,22 @@ Affected imports in:
 
 ### Step 1: Rename `tables/helpers.rs`
 
+**Note**: Use current path (`src/tables/`) or after-002 path (`src/store/tables/`) depending on whether 002-[STRUCT]-00 is complete.
+
 1. **Rename file**
    ```bash
+   # Current path (before 002):
    cd src/tables
+   git mv helpers.rs table_operations.rs
+   git mv helpers_test.rs table_operations_test.rs
+   
+   # OR after 002-[STRUCT]-00:
+   cd src/store/tables
    git mv helpers.rs table_operations.rs
    git mv helpers_test.rs table_operations_test.rs
    ```
 
-2. **Update `tables/mod.rs`**
+2. **Update `tables/mod.rs` or `store/tables/mod.rs`**
    ```rust
    // Change:
    pub mod helpers;
@@ -91,9 +124,9 @@ Affected imports in:
 
 4. **Find and replace imports**
    ```bash
-   # Search for imports
+   # Search for imports (use appropriate base path)
    grep -r "use.*tables::helpers" src/
-   grep -r "use.*helpers::" src/store/tables/
+   grep -r "use.*helpers::" src/tables/  # OR src/store/tables/
    
    # Replace with table_operations
    ```
@@ -110,11 +143,16 @@ Affected imports in:
 
 1. **Rename file**
    ```bash
+   # Current path (before 002):
    cd src/indices
+   git mv builder_tests.rs builder_test.rs
+   
+   # OR after 002-[STRUCT]-00:
+   cd src/store/indices
    git mv builder_tests.rs builder_test.rs
    ```
 
-2. **Update `indices/mod.rs`**
+2. **Update `indices/mod.rs` or `store/indices/mod.rs`**
    ```rust
    // Change:
    #[cfg(test)]
@@ -150,7 +188,15 @@ cargo test --lib
 - [ ] Copyright headers intact
 
 ## Files Affected
-**Direct changes**:
+
+**Direct changes** (current paths before 002-[STRUCT]-00):
+- `src/tables/helpers.rs` → `src/tables/table_operations.rs`
+- `src/tables/helpers_test.rs` → `src/tables/table_operations_test.rs`
+- `src/indices/builder_tests.rs` → `src/indices/builder_test.rs`
+- `src/tables/mod.rs` (update module declarations)
+- `src/indices/mod.rs` (update module declarations)
+
+**After 002-[STRUCT]-00** (relocated to store/):
 - `src/store/tables/helpers.rs` → `src/store/tables/table_operations.rs`
 - `src/store/tables/helpers_test.rs` → `src/store/tables/table_operations_test.rs`
 - `src/store/indices/builder_tests.rs` → `src/store/indices/builder_test.rs`

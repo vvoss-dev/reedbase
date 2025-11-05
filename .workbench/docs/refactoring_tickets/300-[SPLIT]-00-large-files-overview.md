@@ -11,6 +11,12 @@
 ## Estimated Effort
 4-5 hours total (6 files)
 
+## Path References
+
+**⚠️ DUAL PATH NOTATION**:
+- Paths shown as **Current** (before 002-[STRUCT]-00) → **After 002** (after folder reorganisation)
+- Use current paths if 002-[STRUCT]-00 not yet complete
+
 ## Context
 CLAUDE.md requires:
 > **2. Principle**: KISS (Keep It Simple, Stupid)
@@ -18,14 +24,14 @@ CLAUDE.md requires:
 
 Files over 600 lines are candidates for splitting. We have **6 files**:
 
-| File | Lines | Issue | Split Priority |
-|------|-------|-------|----------------|
-| `btree/tree.rs` | 782 | All B+-Tree ops in one file | **CRITICAL** |
-| `reedql/parser.rs` | 730 | All SQL parsing in one file | **CRITICAL** |
-| `reedql/executor.rs` | 697 | All query execution in one file | **HIGH** |
-| `btree/page.rs` | 669 | Page + serialization mixed | **HIGH** |
-| `database/execute.rs` | 661 | All writes in one file | **MEDIUM** |
-| `bin/formatters/mod.rs` | 177 | All formatters in mod.rs | **LOW** |
+| File | Lines | Current Path | After 002 Path | Split Priority |
+|------|-------|--------------|----------------|----------------|
+| `tree.rs` | 782 | `src/btree/` | `src/store/btree/` | **CRITICAL** |
+| `parser.rs` | 730 | `src/reedql/` | `src/api/reedql/` | **CRITICAL** |
+| `executor.rs` | 697 | `src/reedql/` | `src/api/reedql/` | **HIGH** |
+| `page.rs` | 669 | `src/btree/` | `src/store/btree/` | **HIGH** |
+| `execute.rs` | 661 | `src/database/` | `src/api/db/` | **MEDIUM** |
+| `formatters/mod.rs` | 177 | `src/bin/` | `src/api/cli/formatters/` | **LOW** |
 
 ## Target State
 Each file split into focused modules with single responsibility:
@@ -45,18 +51,18 @@ Each file split into focused modules with single responsibility:
 ## Sub-Tickets
 
 ### Critical Priority (do first)
-- `SPLIT-301-00-btree-tree.md` - Split 782-line B+-Tree into focused modules
-- `SPLIT-302-00-reedql-parser.md` - Split 730-line parser by SQL statement type
+- `301-[SPLIT]-00-btree-tree.md` - Split 782-line B+-Tree (`src/btree/tree.rs` → `src/store/btree/`)
+- `302-[SPLIT]-00-reedql-parser.md` - Split 730-line parser (`src/reedql/parser.rs` → `src/api/reedql/`)
 
 ### High Priority
-- `SPLIT-303-00-reedql-executor.md` - Split 697-line executor into read/write
-- `SPLIT-304-00-btree-page.md` - Split 669-line page into ops + serialization
+- `303-[SPLIT]-00-reedql-executor.md` - Split executor (`src/reedql/executor.rs` → `src/api/reedql/`)
+- `304-[SPLIT]-00-btree-page.md` - Split page logic (`src/btree/page.rs` → `src/store/btree/`)
 
 ### Medium Priority
-- `SPLIT-305-00-database-execute.md` - Split 661-line execute into INSERT/UPDATE/DELETE
+- `305-[SPLIT]-00-database-execute.md` - Split execute (`src/database/execute.rs` → `src/api/db/`)
 
 ### Low Priority (nice to have)
-- `SPLIT-306-00-bin-formatters.md` - Extract formatters from mod.rs
+- `306-[SPLIT]-00-bin-formatters.md` - Extract formatters (`src/bin/formatters/` → `src/api/cli/formatters/`)
 
 ## Implementation Pattern
 
@@ -115,12 +121,12 @@ For each large file:
 - Better for code review
 
 **Execution Order**:
-1. **btree/tree.rs** - Most complex, highest impact
-2. **reedql/parser.rs** - Clear natural boundaries
-3. **reedql/executor.rs** - Pairs with parser
-4. **btree/page.rs** - Related to tree.rs
-5. **database/execute.rs** - Natural split by operation
-6. **bin/formatters/mod.rs** - Easiest, lowest impact
+1. **tree.rs** (`src/btree/` → `src/store/btree/`) - Most complex, highest impact
+2. **parser.rs** (`src/reedql/` → `src/api/reedql/`) - Clear natural boundaries
+3. **executor.rs** (`src/reedql/` → `src/api/reedql/`) - Pairs with parser
+4. **page.rs** (`src/btree/` → `src/store/btree/`) - Related to tree.rs
+5. **execute.rs** (`src/database/` → `src/api/db/`) - Natural split by operation
+6. **formatters/mod.rs** (`src/bin/` → `src/api/cli/formatters/`) - Easiest, lowest impact
 
 **Risk Mitigation**:
 - Split one file at a time

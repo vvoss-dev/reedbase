@@ -11,6 +11,17 @@
 ## Estimated Effort
 1 hour
 
+## Path References
+
+**⚠️ NOTE**: Verification commands use final paths after all refactoring (including 002-[STRUCT]-00).
+
+If 002-[STRUCT]-00 not executed, adjust paths accordingly:
+- `src/api/` → `src/database/`, `src/reedql/`, `src/bin/`
+- `src/store/` → `src/btree/`, `src/tables/`, `src/indices/`, `src/registry/`
+- `src/validate/` → `src/schema/`, `src/functions/`
+- `src/process/` → `src/locks/`, `src/conflict/`, `src/merge/`, `src/version/`
+- `src/ops/` → `src/backup/`, `src/metrics/`, `src/log/`
+
 ## Context
 Before squashing commits and launching, verify that ALL refactoring meets CLAUDE.md standards.
 
@@ -110,48 +121,58 @@ find src -name "*_test.rs" | wc -l
 find src -name "*.rs" -exec sh -c 'if ! head -1 "{}" | grep -q "Copyright 2025"; then echo "{}"; fi' \;
 ```
 
-## File Organization
+## File Organisation
 
 - [ ] Module structure is logical and clear
 - [ ] Related files are grouped together
 - [ ] No orphaned or misplaced files
 - [ ] Directory structure matches documentation
 
-**Structure**:
+**Expected structure** (after all tickets including 002-[STRUCT]-00):
 ```
 src/
-├── backup/              # Backup & restore
-├── btree/               # B+-Tree index engine
-│   ├── tree.rs          # Core struct (~100 lines)
-│   ├── tree_search.rs   # Search operations
-│   ├── tree_insert.rs   # Insert operations
-│   ├── tree_delete.rs   # Delete operations
-│   ├── tree_maintenance.rs
-│   └── ...
-├── concurrent/          # Concurrency primitives
-├── conflict/            # Conflict resolution
-├── database/            # High-level API
-│   ├── execute.rs OR
-│   ├── execute_insert.rs, execute_update.rs, execute_delete.rs
-│   └── ...
-├── functions/           # Computed functions
-├── indices/             # Smart indices
-├── log/                 # Encoded logs
-├── merge/               # CSV merging
-├── metrics/             # Observability
-├── reedql/              # Query language
-│   ├── parser.rs OR
-│   ├── parser_select.rs, parser_mutations.rs
-│   ├── executor.rs OR
-│   ├── executor_select.rs, executor_mutations.rs
-│   └── ...
-├── registry/            # Dictionaries
-├── schema/              # RBKS validation
-├── tables/              # Universal table API
-│   ├── table_operations.rs  # Renamed from helpers.rs
-│   └── ...
-└── version/             # Delta versioning
+├── api/                 # External interfaces
+│   ├── db/              # High-level database API (was database/)
+│   │   ├── execute.rs OR execute_insert.rs, execute_update.rs, execute_delete.rs
+│   │   └── ...
+│   ├── reedql/          # Query language
+│   │   ├── parser.rs OR parser_select.rs, parser_mutations.rs
+│   │   ├── executor.rs OR executor_select.rs, executor_mutations.rs
+│   │   └── ...
+│   └── cli/             # CLI interface (was bin/)
+│       └── formatters/
+│
+├── store/               # Storage layer
+│   ├── tables/          # Universal table API
+│   │   ├── table_operations.rs  # Renamed from helpers.rs
+│   │   └── ...
+│   ├── btree/           # B+-Tree index engine
+│   │   ├── tree.rs          # Core struct (~100 lines)
+│   │   ├── tree_search.rs   # Search operations
+│   │   ├── tree_insert.rs   # Insert operations
+│   │   ├── tree_delete.rs   # Delete operations
+│   │   ├── tree_maintenance.rs
+│   │   └── ...
+│   ├── indices/         # Smart indices
+│   └── registry/        # Dictionaries
+│
+├── validate/            # Data validation
+│   ├── schema/          # RBKS validation
+│   └── functions/       # Computed functions
+│
+├── process/             # Process coordination
+│   ├── locks/           # Concurrency primitives (was concurrent/)
+│   ├── conflict/        # Conflict resolution
+│   ├── merge/           # CSV merging
+│   └── version/         # Delta versioning
+│
+└── ops/                 # Operations
+    ├── backup/          # Backup & restore
+    ├── metrics/         # Observability
+    └── log/             # Encoded logs
 ```
+
+**If 002-[STRUCT]-00 NOT executed**, verify flat structure instead.
 
 ## Test Coverage
 
@@ -241,6 +262,5 @@ Randomly review 5 modules:
 ## Next Steps
 
 Once all checks pass:
-1. → **COMMIT-900-00**: Squash all commits
-2. → **LAUNCH-901-00**: Final commit message and push
-3. → 🚀 **LAUNCH v0.2.0-beta**
+1. → **900-[LAUNCH]-00**: Squash all commits, final commit message, and push
+2. → 🚀 **LAUNCH v0.2.0-beta**

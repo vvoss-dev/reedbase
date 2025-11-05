@@ -1,4 +1,4 @@
-# FIX-001-00: Fix Test Registry Setup
+# 001-[PREP]-00: Fix Test Registry Setup
 
 ## Status
 - [x] Not Started
@@ -10,6 +10,14 @@
 
 ## Estimated Effort
 30 minutes
+
+## Path References
+
+**⚠️ DUAL PATH NOTATION**:
+- **Current**: `src/tables/` (before 002-[STRUCT]-00)
+- **After**: `src/store/tables/` (after 002-[STRUCT]-00)
+
+Use current paths if structure not yet reorganized.
 
 ## Context
 27 tests are failing due to registry initialization issues:
@@ -23,9 +31,19 @@ called `Result::unwrap()` on an `Err` value: IoError {
 Tests initialize registry but fail to find dictionary files. This must be fixed before any refactoring.
 
 ## Current State
-- `src/store/tables/table_test.rs` calls `init_registry()` but dictionaries not found
-- `src/ops/backup/tests.rs` has similar issues
-- 27 tests failing: backup (6), database (2), log (3), tables (16)
+- **tables/table_test.rs** calls `init_registry()` but dictionaries not found
+  - Current: `src/tables/table_test.rs`
+  - After: `src/store/tables/table_test.rs`
+  
+- **backup/tests.rs** has similar issues
+  - Current: `src/backup/tests.rs`
+  - After: `src/ops/backup/tests.rs`
+
+- 27 tests failing:
+  - backup (6 tests)
+  - database/execute (2 tests)
+  - log (3 tests)  
+  - tables (16 tests)
 
 **Failing tests**:
 - `backup::tests::test_*` (6 tests)
@@ -48,34 +66,43 @@ None - this is the foundation
 
 ## Implementation Steps
 
-1. **Investigate registry initialization**
-   ```bash
-   cd reedbase
-   cargo test --lib tables::table_test::tests::test_table_new -- --nocapture
-   ```
-   - Check if `init_registry()` creates directories
-   - Verify dictionary files are written
-   - Check path resolution
+### Step 1: Investigate registry initialization
 
-2. **Fix registry test setup**
-   - Ensure `registry/init.rs` creates all required files
-   - Add better error messages for missing dictionaries
-   - Consider test-specific registry initialization helper
+```bash
+cd reedbase
 
-3. **Options**:
-   **Option A**: Fix `init_registry()` to be more robust
-   **Option B**: Create `init_registry_for_tests()` helper
-   **Option C**: Mock registry in tests (avoid filesystem)
+# Run failing test to see error
+cargo test --lib tables::table_test::tests::test_table_new -- --nocapture
 
-4. **Verify fix**
-   ```bash
-   cargo test --lib
-   # Should show: test result: ok. 656 passed; 0 failed
-   ```
+# Check registry init code
+# Current: src/registry/init.rs
+# After: src/store/registry/init.rs (if 002 done)
+```
 
-5. **Clean up**
-   - Ensure temp directories are removed after tests
-   - Add comments explaining test setup
+Check:
+- Does `init_registry()` create all directories?
+- Are dictionary files written?
+- Is path resolution correct?
+
+### Step 2: Fix registry test setup
+
+Options to investigate:
+- **Option A**: Fix `registry/init.rs` to be more robust
+- **Option B**: Create `init_registry_for_tests()` helper
+- **Option C**: Mock registry in tests (avoid filesystem)
+
+### Step 3: Verify fix
+
+```bash
+# Run all tests
+cargo test --lib
+
+# Should show: test result: ok. 656 passed; 0 failed
+```
+
+### Step 4: Clean up
+- Ensure temp directories are removed after tests
+- Add comments explaining test setup
 
 ## Verification
 - [ ] All 656 library tests pass
@@ -84,12 +111,21 @@ None - this is the foundation
 - [ ] Can run tests multiple times without issues
 
 ## Files Affected
+
+**Current paths** (before 002-[STRUCT]-00):
 - `src/registry/init.rs` (likely needs robustness improvements)
-- `src/store/tables/table_test.rs` (test setup)
-- `src/ops/backup/tests.rs` (test setup)
+- `src/tables/table_test.rs` (test setup)
+- `src/backup/tests.rs` (test setup)
 - Possibly: `src/registry/dictionary.rs` (error handling)
 
+**After paths** (after 002-[STRUCT]-00):
+- `src/store/registry/init.rs`
+- `src/store/tables/table_test.rs`
+- `src/ops/backup/tests.rs`
+- `src/store/registry/dictionary.rs`
+
 ## Notes
+
 **Root Cause**: Tests create temp directories but registry code may not handle missing parent directories correctly.
 
 **Quick Check**:
