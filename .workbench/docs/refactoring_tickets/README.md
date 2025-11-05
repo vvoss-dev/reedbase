@@ -5,23 +5,25 @@
 ## Ticket Naming Convention
 
 ```
-{context}-{ticket-number}-{sub-number}-{short-desc}.md
+{number}-[{context}]-{sub}-{short-desc}.md
 ```
 
 **Examples**:
-- `TESTS-001-00-extract-inline-tests.md` - Extract inline test modules
-- `SPLIT-002-00-btree-tree.md` - Split btree/tree.rs
-- `RENAME-003-00-generic-names.md` - Rename generic filenames
-- `CLEANUP-004-00-mod-files.md` - Clean up mod.rs files
+- `001-[PREP]-00-fix-test-registry.md` - Fix failing tests
+- `002-[STRUCT]-00-reorganize-folders.md` - Reorganize folder structure
+- `100-[TESTS]-00-extract-inline-tests-overview.md` - Extract inline test modules
+- `301-[SPLIT]-00-btree-tree.md` - Split btree/tree.rs
+- `200-[RENAME]-00-generic-filenames.md` - Rename generic filenames
 
 ## Contexts
 
-- **TESTS**: Test-related refactoring (inline → _test.rs)
-- **SPLIT**: File splitting (large files → focused modules)
-- **RENAME**: File/function renaming (generic → specific)
-- **CLEANUP**: General cleanup (mod.rs, docs, etc.)
-- **FIX**: Bug fixes discovered during refactoring
-- **VERIFY**: Verification and testing tasks
+- **[PREP]**: Preparation & bug fixes (001-099)
+- **[STRUCT]**: Structure reorganization (001-099)
+- **[TESTS]**: Test-related refactoring (100-199)
+- **[RENAME]**: File/function renaming (200-299)
+- **[SPLIT]**: File splitting (300-399)
+- **[VERIFY]**: Verification and testing (600-699)
+- **[LAUNCH]**: Final commit & launch (900-999)
 
 ## Ticket Format
 
