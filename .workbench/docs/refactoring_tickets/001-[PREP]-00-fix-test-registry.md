@@ -23,8 +23,8 @@ called `Result::unwrap()` on an `Err` value: IoError {
 Tests initialize registry but fail to find dictionary files. This must be fixed before any refactoring.
 
 ## Current State
-- `src/tables/table_test.rs` calls `init_registry()` but dictionaries not found
-- `src/backup/tests.rs` has similar issues
+- `src/store/tables/table_test.rs` calls `init_registry()` but dictionaries not found
+- `src/ops/backup/tests.rs` has similar issues
 - 27 tests failing: backup (6), database (2), log (3), tables (16)
 
 **Failing tests**:
@@ -85,8 +85,8 @@ None - this is the foundation
 
 ## Files Affected
 - `src/registry/init.rs` (likely needs robustness improvements)
-- `src/tables/table_test.rs` (test setup)
-- `src/backup/tests.rs` (test setup)
+- `src/store/tables/table_test.rs` (test setup)
+- `src/ops/backup/tests.rs` (test setup)
 - Possibly: `src/registry/dictionary.rs` (error handling)
 
 ## Notes

@@ -12,7 +12,7 @@
 2 hours
 
 ## Context
-`src/btree/tree.rs` is **782 lines** containing ALL B+-Tree operations:
+`src/store/btree/tree.rs` is **782 lines** containing ALL B+-Tree operations:
 - Tree struct + initialization
 - Search operations (get, range)
 - Insert operations (with node splitting)
@@ -24,7 +24,7 @@ This violates KISS principle - one file should have one clear responsibility.
 
 ## Current State
 
-**File**: `src/btree/tree.rs` (782 lines)
+**File**: `src/store/btree/tree.rs` (782 lines)
 
 **Responsibilities** (identified by analyzing code):
 1. **Core struct** (~50 lines)
@@ -64,7 +64,7 @@ This violates KISS principle - one file should have one clear responsibility.
 ## Target State
 
 ```
-src/btree/
+src/store/btree/
 ├── tree.rs              # Core struct + initialization (~100 lines)
 ├── tree_search.rs       # Search operations (~150 lines)
 ├── tree_insert.rs       # Insert + split (~200 lines)
@@ -116,7 +116,7 @@ let result = tree.get(key)?;
 
 ### Step 2: Extract Search Operations (Easiest First)
 
-1. **Create `src/btree/tree_search.rs`**
+1. **Create `src/store/btree/tree_search.rs`**
    ```rust
    // Copyright 2025 Vivian Voss. Licensed under the Apache License, Version 2.0.
    // SPDX-License-Identifier: Apache-2.0
@@ -170,7 +170,7 @@ let result = tree.get(key)?;
 
 ### Step 3: Extract Insert Operations
 
-1. **Create `src/btree/tree_insert.rs`**
+1. **Create `src/store/btree/tree_insert.rs`**
    ```rust
    // Copyright 2025 Vivian Voss. Licensed under the Apache License, Version 2.0.
    // SPDX-License-Identifier: Apache-2.0
@@ -196,7 +196,7 @@ let result = tree.get(key)?;
 
 ### Step 4: Extract Delete Operations
 
-1. **Create `src/btree/tree_delete.rs`**
+1. **Create `src/store/btree/tree_delete.rs`**
 2. **Move functions**:
    - `delete()`
    - `merge_nodes()`
@@ -205,7 +205,7 @@ let result = tree.get(key)?;
 
 ### Step 5: Extract Maintenance Operations
 
-1. **Create `src/btree/tree_maintenance.rs`**
+1. **Create `src/store/btree/tree_maintenance.rs`**
 2. **Move functions**:
    - `balance()`
    - `compact()`
@@ -259,14 +259,14 @@ cargo bench --bench btree
 
 ## Files Affected
 **Created**:
-- `src/btree/tree_search.rs` (~150 lines)
-- `src/btree/tree_insert.rs` (~200 lines)
-- `src/btree/tree_delete.rs` (~200 lines)
-- `src/btree/tree_maintenance.rs` (~150 lines)
+- `src/store/btree/tree_search.rs` (~150 lines)
+- `src/store/btree/tree_insert.rs` (~200 lines)
+- `src/store/btree/tree_delete.rs` (~200 lines)
+- `src/store/btree/tree_maintenance.rs` (~150 lines)
 
 **Modified**:
-- `src/btree/tree.rs` (782 → ~100 lines)
-- `src/btree/mod.rs` (add new module declarations)
+- `src/store/btree/tree.rs` (782 → ~100 lines)
+- `src/store/btree/mod.rs` (add new module declarations)
 
 **Unchanged** (public API):
 - External imports: `use reedbase::btree::BPlusTree` still works

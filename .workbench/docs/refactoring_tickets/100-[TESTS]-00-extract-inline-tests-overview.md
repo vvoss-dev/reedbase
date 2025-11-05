@@ -19,22 +19,22 @@ Currently **17 files** have inline test modules that must be extracted.
 
 ## Current State
 Files with inline `#[cfg(test)] mod tests`:
-1. `src/database/types.rs` (570 lines)
-2. `src/database/execute.rs` (661 lines)
-3. `src/database/query.rs` (387 lines)
-4. `src/database/index.rs` (532 lines)
-5. `src/database/stats.rs` (200 lines)
-6. `src/reedql/types.rs` (483 lines)
-7. `src/reedql/executor.rs` (697 lines)
-8. `src/merge/types.rs` (200 lines)
-9. `src/conflict/types.rs` (404 lines)
-10. `src/schema/types.rs` (306 lines)
-11. `src/btree/page.rs` (669 lines)
-12. `src/btree/types.rs` (150 lines)
-13. `src/version/rebuild.rs` (200 lines)
-14. `src/concurrent/types.rs` (100 lines)
-15. `src/reedql/parser.rs` (730 lines) - if has inline tests
-16. `src/database/database.rs` (526 lines) - if has inline tests
+1. `src/api/db/types.rs` (570 lines)
+2. `src/api/db/execute.rs` (661 lines)
+3. `src/api/db/query.rs` (387 lines)
+4. `src/api/db/index.rs` (532 lines)
+5. `src/api/db/stats.rs` (200 lines)
+6. `src/api/reedql/types.rs` (483 lines)
+7. `src/api/reedql/executor.rs` (697 lines)
+8. `src/process/merge/types.rs` (200 lines)
+9. `src/process/conflict/types.rs` (404 lines)
+10. `src/validate/schema/types.rs` (306 lines)
+11. `src/store/btree/page.rs` (669 lines)
+12. `src/store/btree/types.rs` (150 lines)
+13. `src/process/version/rebuild.rs` (200 lines)
+14. `src/process/locks/types.rs` (100 lines)
+15. `src/api/reedql/parser.rs` (730 lines) - if has inline tests
+16. `src/api/db/database.rs` (526 lines) - if has inline tests
 17. Additional files discovered during execution
 
 ## Target State

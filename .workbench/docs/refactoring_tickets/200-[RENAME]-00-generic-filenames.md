@@ -16,12 +16,12 @@ CLAUDE.md requires:
 > **7. Avoid**: Generic names like `handler.rs`, `middleware.rs`, `utils.rs`
 
 Found **2 violations**:
-1. `src/tables/helpers.rs` - vague "helpers" name
-2. `src/indices/builder_tests.rs` - wrong naming convention (should be `builder_test.rs`)
+1. `src/store/tables/helpers.rs` - vague "helpers" name
+2. `src/store/indices/builder_tests.rs` - wrong naming convention (should be `builder_test.rs`)
 
 ## Current State
 
-### File 1: `src/tables/helpers.rs` (200 lines)
+### File 1: `src/store/tables/helpers.rs` (200 lines)
 **Functions**:
 - `list_tables()` - List all tables in database
 - `table_exists()` - Check if table exists
@@ -31,7 +31,7 @@ Found **2 violations**:
 
 **Recommendation**: `table_operations.rs` (clearest about what it does)
 
-### File 2: `src/indices/builder_tests.rs` (334 lines)
+### File 2: `src/store/indices/builder_tests.rs` (334 lines)
 **Issue**: Naming convention inconsistency
 - All other test files: `{name}_test.rs`
 - This file: `{name}_tests.rs` (plural)
@@ -41,12 +41,12 @@ Found **2 violations**:
 ## Target State
 
 ```
-src/tables/
+src/store/tables/
 ├── table_operations.rs     # Renamed from helpers.rs
 ├── table_operations_test.rs # Already exists as helpers_test.rs, rename too
 └── ...
 
-src/indices/
+src/store/indices/
 ├── builder_test.rs         # Renamed from builder_tests.rs
 └── ...
 ```
@@ -93,7 +93,7 @@ Affected imports in:
    ```bash
    # Search for imports
    grep -r "use.*tables::helpers" src/
-   grep -r "use.*helpers::" src/tables/
+   grep -r "use.*helpers::" src/store/tables/
    
    # Replace with table_operations
    ```
@@ -151,11 +151,11 @@ cargo test --lib
 
 ## Files Affected
 **Direct changes**:
-- `src/tables/helpers.rs` → `src/tables/table_operations.rs`
-- `src/tables/helpers_test.rs` → `src/tables/table_operations_test.rs`
-- `src/indices/builder_tests.rs` → `src/indices/builder_test.rs`
-- `src/tables/mod.rs` (update module declarations)
-- `src/indices/mod.rs` (update module declarations)
+- `src/store/tables/helpers.rs` → `src/store/tables/table_operations.rs`
+- `src/store/tables/helpers_test.rs` → `src/store/tables/table_operations_test.rs`
+- `src/store/indices/builder_tests.rs` → `src/store/indices/builder_test.rs`
+- `src/store/tables/mod.rs` (update module declarations)
+- `src/store/indices/mod.rs` (update module declarations)
 
 **Potential import updates**:
 - Any file importing `tables::helpers` (search needed)
