@@ -270,3 +270,50 @@ grep -r "#\[cfg(test)\]" src --include="*.rs" | grep "mod tests" | grep -v "_tes
 **Overall**: 🔴 **NOT READY** - Requires refactoring before launch
 
 **After refactoring**: 🟢 **READY FOR LAUNCH**
+
+---
+
+## 📁 STRUCT-050: Folder Structure Reorganization (ADDED)
+
+**Decision**: Reorganize flat structure into 5 clear categories.
+
+**New Structure**:
+```
+src/
+├── api/         # External interfaces (db/, reedql/, cli/)
+├── store/       # Storage layer (tables/, btree/, indices/, registry/)
+├── validate/    # Data validation (schema/, functions/)
+├── process/     # Process coordination (locks/, conflict/, merge/, version/)
+└── ops/         # Operations (backup/, metrics/, log/)
+```
+
+**Why**: KISS for developers - clear hierarchy shows relationships and intent.
+
+**When**: After FIX-001, before or after TESTS-100.
+
+**Effort**: 1 hour (mostly import updates)
+
+---
+
+## Updated Critical Path
+
+```
+FIX-001 (30m - CRITICAL)
+   ↓
+STRUCT-050 (1h - NEW: Folder restructure) ← OPTIONAL but recommended
+   ↓
+TESTS-100 series (2.5h)
+   ↓
+RENAME-200 (30m)
+   ↓
+SPLIT-300 series (7h)
+   ↓
+VERIFY-600 (1h)
+   ↓
+COMMIT-900 (15m)
+```
+
+**Decision point**: Include STRUCT-050 or skip?
+- **Include**: Better structure for all subsequent work (recommended)
+- **Skip**: Faster path to completion
+
