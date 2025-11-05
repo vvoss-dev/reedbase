@@ -259,28 +259,52 @@ impl Display for Row {
 Jedes Ticket bekommt diesen Abschnitt **vor** "Implementation Steps":
 
 ```markdown
-## ✅ Qualitätssicherung (vor Commit ALLE checken!)
+## ✅ Qualitätssicherung + Regression Testing (MANDATORY!)
 
 ### Pre-Implementation
 - [ ] Standard #0: Funktionssuche durchgeführt (keine Duplikate)
 - [ ] Standard #3: Dateiname spezifisch (keine generischen Namen)
 - [ ] Standard #8: Architektur-Layer korrekt (NO MVC)
+- [ ] **Regression: Alte Tests in src-old/ identifiziert**
+- [ ] **Regression: Erwartetes Verhalten dokumentiert**
 
 ### During Implementation  
 - [ ] Standard #1: BBC English (comments, docstrings, errors)
 - [ ] Standard #4: Single Responsibility (eine Funktion = ein Job)
 - [ ] Standard #6: No Swiss Army (keine Multi-Purpose Functions)
 - [ ] Standard #7: Spezifische Namen (Funktionen, Variablen, Structs)
+- [ ] **Regression: Tests von src-old/ nach src/ adaptiert**
+- [ ] **Regression: Outputs mit src-old/ verglichen**
 
 ### Post-Implementation
 - [ ] Standard #2: Line count <400 (wc -l file.rs)
 - [ ] Standard #5: Tests in separate _test.rs file
 - [ ] Standard #0: Keine Duplikate erstellt (verify nochmal)
+- [ ] **Regression: Alle alten Tests grün (cargo test)**
+- [ ] **Regression: Behaviour identisch zu src-old/**
 
 ### Final Verification
 ```bash
-# Run all checks before commit
+# CLAUDE.md compliance check
 ./scripts/quality-check.sh src/module/file.rs
+
+# Regression verification
+./scripts/regression-verify.sh module
+# ✅ Expected: All checks PASS
+
+# Performance check (if benchmarks exist)
+cargo bench --bench module_bench
+# ✅ Expected: Within 10% of src-old/ performance
+
+# Commit with full verification
+git commit -m "[CLEAN-XXX] feat(module): implement feature
+
+✅ QS-Matrix verified (all 8 CLAUDE.md standards)
+✅ Regression tests: XX/XX passing
+✅ Behaviour identical to src-old/
+✅ Performance: Within X% of baseline
+
+All checks passing."
 ```
 
 ## Implementation Steps
