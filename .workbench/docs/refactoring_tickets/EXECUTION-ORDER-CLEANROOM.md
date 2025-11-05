@@ -12,11 +12,11 @@
 
 ```
 001-[PREP]-00: Backup & Structure Setup
-    ├─ mv src/ src-old/
+    ├─ mv src/ last/src/
     ├─ Create new folder structure (core/, api/, store/, ...)
     └─ Create module scaffolds (mod.rs files)
     
-    Result: Clean slate, src-old as reference + test backup
+    Result: Clean slate, last/ as reference + test backup
 ```
 
 **Critical**: src-old bleibt erhalten für:
@@ -73,7 +73,7 @@ Verify: cargo test --lib core error
     ├─ store/btree/tree.rs - B-Tree implementation
     ├─ store/btree/node.rs - Node structures  
     ├─ store/btree/types.rs - Type definitions
-    └─ Reference: src-old/btree/
+    └─ Reference: last/src/btree/
     
     ✅ QS-Matrix: Each file <400 lines, tests separate
     ✅ Uses core::paths for data directories
@@ -102,7 +102,7 @@ Verify: cargo test --lib core error
     ├─ store/indices/namespace.rs - Namespace support
     ├─ store/indices/manager.rs - Index management
     ├─ store/indices/builder.rs - Index builder (<200 lines)
-    └─ Reference: src-old/indices/
+    └─ Reference: last/src/indices/
     
     ✅ QS-Matrix: Specific names (no "utils", "helpers")
 
@@ -129,7 +129,7 @@ Verify: cargo test --lib store
     ├─ validate/rbks/parser.rs - RBKS key parsing
     ├─ validate/rbks/validator.rs - Validation with angle-bracket modifiers
     ├─ validate/rbks/types.rs - RBKS types
-    └─ Reference: src-old/schema/rbks.rs
+    └─ Reference: last/src/schema/rbks.rs
     
     ✅ QS-Matrix: Single responsibility per function
 
@@ -148,7 +148,7 @@ Verify: cargo test --lib validate
     ├─ api/db/database.rs - Database struct
     ├─ api/db/types.rs - Type definitions
     ├─ api/db/stats.rs - Statistics
-    └─ Reference: src-old/database/
+    └─ Reference: last/src/database/
     
     ✅ QS-Matrix: NO MVC (no handle_request patterns)
 
@@ -163,7 +163,7 @@ Verify: cargo test --lib validate
     ├─ api/db/insert.rs - INSERT operations
     ├─ api/db/update.rs - UPDATE operations
     ├─ api/db/delete.rs - DELETE operations
-    └─ Split from src-old/database/execute.rs (was 661 lines)
+    └─ Split from last/src/database/execute.rs (was 661 lines)
     
     ✅ QS-Matrix: Each file <400 lines (was 661!)
 
@@ -172,7 +172,7 @@ Verify: cargo test --lib validate
     ├─ api/reedql/lexer.rs - Tokenisation (split from old parser)
     ├─ api/reedql/ast.rs - AST construction (split from old parser)
     ├─ api/reedql/types.rs - Type definitions
-    └─ Split from src-old/reedql/parser.rs (was 730 lines!)
+    └─ Split from last/src/reedql/parser.rs (was 730 lines!)
     
     ✅ QS-Matrix: Standard #2 (KISS, split large files)
 
@@ -180,7 +180,7 @@ Verify: cargo test --lib validate
     ├─ api/reedql/executor.rs - Query execution (<400 lines)
     ├─ api/reedql/planner.rs - Query planning
     ├─ api/reedql/analyzer.rs - Query analysis
-    └─ Split from src-old/reedql/executor.rs (was 697 lines)
+    └─ Split from last/src/reedql/executor.rs (was 697 lines)
     
     ✅ QS-Matrix: Single responsibility per file
 
@@ -199,14 +199,14 @@ Verify: cargo test --lib api
     ├─ process/concurrent/lock.rs - Lock implementations
     ├─ process/concurrent/queue.rs - Queue structures
     ├─ process/concurrent/types.rs
-    └─ Reference: src-old/concurrent/
+    └─ Reference: last/src/concurrent/
     
     ✅ QS-Matrix: Tests in lock_test.rs, queue_test.rs
 
 050-[PROCESS]-02: Conflict Resolution (1-1.5h)
     ├─ process/conflict/resolution.rs - Resolution strategies
     ├─ process/conflict/types.rs
-    └─ Reference: src-old/conflict/
+    └─ Reference: last/src/conflict/
     
     ✅ QS-Matrix: Specific function names
 
@@ -234,7 +234,7 @@ Verify: cargo test --lib process
     ├─ ops/version/delta.rs - Delta tracking
     ├─ ops/version/rebuild.rs - Crash recovery (CRC32)
     ├─ ops/version/index.rs - Version index
-    └─ Reference: src-old/version/
+    └─ Reference: last/src/version/
     
     ✅ QS-Matrix: Tests in delta_test.rs, rebuild_test.rs
 
@@ -243,7 +243,7 @@ Verify: cargo test --lib process
     ├─ ops/metrics/aggregator.rs - Aggregation
     ├─ ops/metrics/storage.rs - Storage
     ├─ ops/metrics/types.rs
-    └─ Reference: src-old/metrics/
+    └─ Reference: last/src/metrics/
     
     ✅ QS-Matrix: Specific names (not "manager", "handler")
 
@@ -263,7 +263,7 @@ Verify: cargo test --lib ops
     ├─ ops/log/decoder.rs - Log decoding
     ├─ ops/log/validator.rs - CRC32 validation
     ├─ ops/log/types.rs
-    └─ Reference: src-old/log/
+    └─ Reference: last/src/log/
     
     ✅ QS-Matrix: Tests in encoder_test.rs, decoder_test.rs
 
@@ -271,7 +271,7 @@ Verify: cargo test --lib ops
     ├─ ops/merge/csv.rs - CSV merging
     ├─ ops/merge/diff.rs - Diff algorithm
     ├─ ops/merge/types.rs
-    └─ Reference: src-old/merge/
+    └─ Reference: last/src/merge/
     
     ✅ QS-Matrix: Uses store::tables::parser (no duplicate CSV logic)
 
@@ -289,7 +289,7 @@ Verify: cargo test --lib ops::log ops::merge
 090-[BIN]-01: CLI Structure (1h)
     ├─ bin/reedbase.rs - Main entry point
     ├─ bin/commands/mod.rs - Command dispatcher
-    └─ Reference: src-old/bin/reedbase.rs
+    └─ Reference: last/src/bin/reedbase.rs
     
     ✅ QS-Matrix: Only layer with formatting/Display allowed
 
@@ -308,7 +308,7 @@ Verify: cargo test --lib ops::log ops::merge
     ├─ bin/formatters/table.rs - Table formatting
     ├─ bin/formatters/json.rs - JSON output
     ├─ bin/formatters/csv.rs - CSV output
-    └─ Split from src-old/bin/formatters/mod.rs
+    └─ Split from last/src/bin/formatters/mod.rs
     
     ✅ QS-Matrix: Specific names (not "helpers")
 
@@ -332,7 +332,7 @@ Verify: cargo test --bin reedbase
     
     bash
     rg "pub fn" src/ > src-functions.txt
-    rg "pub fn" src-old/ > src-old-functions.txt
+    rg "pub fn" last/src/ > src-old-functions.txt
     diff src-functions.txt src-old-functions.txt > migration-diff.txt
     
 
@@ -491,14 +491,14 @@ cat .workbench/docs/refactoring_tickets/QS-MATRIX-TEMPLATE.md
 chmod +x scripts/quality-check.sh
 
 # Test it
-./scripts/quality-check.sh src-old/error.rs
+./scripts/quality-check.sh last/src/error.rs
 ```
 
 ### Step 3: Start Phase 0
 
 ```bash
 # Execute 001-[PREP]-00
-mv src/ src-old/
+mv src/ last/src/
 mkdir -p src/{core,api,store,validate,process,ops}/{...}
 # ... (see Phase 0 details above)
 

@@ -10,7 +10,7 @@
 
 ### Standard #0: Code Reuse (MANDATORY CHECK)
 
-- [ ] **Funktionssuche durchgeführt** - Vor jeder neuen Funktion: Existiert sie bereits in src/ oder src-old/?
+- [ ] **Funktionssuche durchgeführt** - Vor jeder neuen Funktion: Existiert sie bereits in src/ oder last/src/?
 - [ ] **Keine Duplikate erstellt** - Wenn ähnliche Funktion existiert: Erweitern statt neu schreiben
 - [ ] **Core-Module genutzt** - Verwendet `core::paths`, `core::validation` statt eigene Utilities
 - [ ] **Dokumentiert warum neu** - Wenn neue Funktion: Begründung warum nicht existierend verwendet
@@ -18,7 +18,7 @@
 **Check-Kommando**:
 ```bash
 # Suche ob Funktion bereits existiert
-rg "pub fn function_name" src/ src-old/
+rg "pub fn function_name" src/ last/src/
 grep "function_name" _workbench/analysis/050-all-functions.txt
 ```
 
@@ -265,7 +265,7 @@ Jedes Ticket bekommt diesen Abschnitt **vor** "Implementation Steps":
 - [ ] Standard #0: Funktionssuche durchgeführt (keine Duplikate)
 - [ ] Standard #3: Dateiname spezifisch (keine generischen Namen)
 - [ ] Standard #8: Architektur-Layer korrekt (NO MVC)
-- [ ] **Regression: Alte Tests in src-old/ identifiziert**
+- [ ] **Regression: Alte Tests in last/src/ identifiziert**
 - [ ] **Regression: Erwartetes Verhalten dokumentiert**
 
 ### During Implementation  
@@ -273,15 +273,15 @@ Jedes Ticket bekommt diesen Abschnitt **vor** "Implementation Steps":
 - [ ] Standard #4: Single Responsibility (eine Funktion = ein Job)
 - [ ] Standard #6: No Swiss Army (keine Multi-Purpose Functions)
 - [ ] Standard #7: Spezifische Namen (Funktionen, Variablen, Structs)
-- [ ] **Regression: Tests von src-old/ nach src/ adaptiert**
-- [ ] **Regression: Outputs mit src-old/ verglichen**
+- [ ] **Regression: Tests von last/src/ nach src/ adaptiert**
+- [ ] **Regression: Outputs mit last/src/ verglichen**
 
 ### Post-Implementation
 - [ ] Standard #2: Line count <400 (wc -l file.rs)
 - [ ] Standard #5: Tests in separate _test.rs file
 - [ ] Standard #0: Keine Duplikate erstellt (verify nochmal)
 - [ ] **Regression: Alle alten Tests grün (cargo test)**
-- [ ] **Regression: Behaviour identisch zu src-old/**
+- [ ] **Regression: Behaviour identisch zu last/src/**
 
 ### Final Verification
 ```bash
@@ -294,14 +294,14 @@ Jedes Ticket bekommt diesen Abschnitt **vor** "Implementation Steps":
 
 # Performance check (if benchmarks exist)
 cargo bench --bench module_bench
-# ✅ Expected: Within 10% of src-old/ performance
+# ✅ Expected: Within 10% of last/src/ performance
 
 # Commit with full verification
 git commit -m "[CLEAN-XXX] feat(module): implement feature
 
 ✅ QS-Matrix verified (all 8 CLAUDE.md standards)
 ✅ Regression tests: XX/XX passing
-✅ Behaviour identical to src-old/
+✅ Behaviour identical to last/src/
 ✅ Performance: Within X% of baseline
 
 All checks passing."

@@ -2,7 +2,7 @@
 
 **MANDATORY**: Altes Ergebnis MUSS dem neuen entsprechen.
 
-**Prinzip**: src/ (neu) MUSS identische Ergebnisse liefern wie src-old/ (alt)
+**Prinzip**: src/ (neu) MUSS identische Ergebnisse liefern wie last/src/ (alt)
 
 ---
 
@@ -11,8 +11,8 @@
 > "alles wird getestet und altes ergebnis muss dem neuen entsprechen"
 
 **Bedeutung**:
-- Jede Funktion in src/ MUSS gleiche Outputs wie src-old/ produzieren
-- Jeder Test aus src-old/ MUSS in src/ grün sein
+- Jede Funktion in src/ MUSS gleiche Outputs wie last/src/ produzieren
+- Jeder Test aus last/src/ MUSS in src/ grün sein
 - Behaviour MUSS identisch sein (keine Breaking Changes)
 - Performance darf sich NICHT verschlechtern
 
@@ -30,11 +30,11 @@
 
 #### Before Implementation
 ```bash
-# 1. Identify corresponding src-old/ functionality
-grep -r "pub fn function_name" src-old/
+# 1. Identify corresponding last/src/ functionality
+grep -r "pub fn function_name" last/src/
 
 # 2. Extract existing tests
-find src-old/ -name "*_test.rs" -o -name "*test*.rs" | grep "module"
+find last/src/ -name "*_test.rs" -o -name "*test*.rs" | grep "module"
 
 # 3. Document expected behaviour
 echo "Function X with input Y should return Z" > expected-behaviour.txt
@@ -42,7 +42,7 @@ echo "Function X with input Y should return Z" > expected-behaviour.txt
 
 #### During Implementation
 ```bash
-# 1. Copy tests from src-old/ to src/
+# 1. Copy tests from last/src/ to src/
 # NOT just copy - adapt to new structure, but SAME assertions
 
 # 2. Run old tests against new implementation
@@ -56,14 +56,14 @@ cargo test --lib module::tests
 ```bash
 # 1. All old tests passing?
 cargo test --lib module
-# Expected: 100% green (same as src-old/)
+# Expected: 100% green (same as last/src/)
 
 # 2. Behaviour identical?
 ./scripts/regression-verify.sh module
 
 # 3. Performance acceptable?
 cargo bench --bench module_bench
-# Expected: Within 10% of src-old/ performance
+# Expected: Within 10% of last/src/ performance
 ```
 
 ---
@@ -105,7 +105,7 @@ cat > /tmp/regression_test.rs << EOF
 // Temporary regression test
 
 // Old implementation
-#[path = "src-old/$MODULE.rs"]
+#[path = "last/src/$MODULE.rs"]
 mod old;
 
 // New implementation
@@ -177,8 +177,8 @@ SKIP=0
 echo "📋 Step 1: Test Results Comparison"
 echo "────────────────────────────────────────────────────────────────"
 
-if [ -d "src-old/$MODULE" ]; then
-    echo "Running tests for src-old/$MODULE..."
+if [ -d "last/src/$MODULE" ]; then
+    echo "Running tests for last/src/$MODULE..."
     OLD_TESTS=$(cargo test --lib $MODULE 2>&1 | grep "test result" || echo "No tests")
     
     echo "Running tests for src/$MODULE..."
@@ -195,7 +195,7 @@ if [ -d "src-old/$MODULE" ]; then
         ((FAIL++))
     fi
 else
-    echo "⚠️  src-old/$MODULE not found (skipping)"
+    echo "⚠️  last/src/$MODULE not found (skipping)"
     ((SKIP++))
 fi
 echo ""
@@ -204,7 +204,7 @@ echo ""
 echo "📋 Step 2: Public API Comparison"
 echo "────────────────────────────────────────────────────────────────"
 
-OLD_API=$(rg "^pub fn" src-old/$MODULE/ 2>/dev/null | sort || echo "")
+OLD_API=$(rg "^pub fn" last/src/$MODULE/ 2>/dev/null | sort || echo "")
 NEW_API=$(rg "^pub fn" src/$MODULE/ 2>/dev/null | sort || echo "")
 
 if [ "$OLD_API" == "$NEW_API" ]; then
@@ -228,7 +228,7 @@ echo ""
 echo "📋 Step 3: Documentation Coverage"
 echo "────────────────────────────────────────────────────────────────"
 
-OLD_DOCS=$(rg "^///|^//!" src-old/$MODULE/ 2>/dev/null | wc -l || echo "0")
+OLD_DOCS=$(rg "^///|^//!" last/src/$MODULE/ 2>/dev/null | wc -l || echo "0")
 NEW_DOCS=$(rg "^///|^//!" src/$MODULE/ 2>/dev/null | wc -l || echo "0")
 
 echo "Old documentation lines: $OLD_DOCS"
@@ -274,7 +274,7 @@ echo ""
 if [ "$FAIL" -eq 0 ]; then
     echo "✅ REGRESSION CHECK PASSED"
     echo ""
-    echo "Module $MODULE maintains behaviour compatibility with src-old/"
+    echo "Module $MODULE maintains behaviour compatibility with last/src/"
     exit 0
 else
     echo "❌ REGRESSION CHECK FAILED"
@@ -291,15 +291,15 @@ fi
 
 ### Category 1: Unit Tests (Function-Level)
 
-**Requirement**: Jede Funktion aus src-old/ hat Test in src/
+**Requirement**: Jede Funktion aus last/src/ hat Test in src/
 
 ```rust
-// src-old/core/paths.rs
+// last/src/core/paths.rs
 pub fn db_dir(base: &Path) -> PathBuf {
     base.join(".reedbase")
 }
 
-// src-old/core/paths_test.rs
+// last/src/core/paths_test.rs
 #[test]
 fn test_db_dir() {
     let base = PathBuf::from("/tmp/test");
@@ -433,7 +433,7 @@ cargo bench --bench btree_bench > new_bench.txt
 - [ ] Standard #0: Funktionssuche durchgeführt
 - [ ] Standard #3: Dateiname spezifisch
 - [ ] Standard #8: Architektur-Layer korrekt
-- [ ] **Regression: Alte Tests identifiziert** (src-old/)
+- [ ] **Regression: Alte Tests identifiziert** (last/src/)
 - [ ] **Regression: Erwartetes Verhalten dokumentiert**
 
 ### During Implementation
@@ -441,14 +441,14 @@ cargo bench --bench btree_bench > new_bench.txt
 - [ ] Standard #4: Single Responsibility
 - [ ] Standard #6: No Swiss Army
 - [ ] Standard #7: Spezifische Namen
-- [ ] **Regression: Tests von src-old/ adaptiert**
+- [ ] **Regression: Tests von last/src/ adaptiert**
 
 ### Post-Implementation
 - [ ] Standard #2: Line count <400
 - [ ] Standard #5: Tests in _test.rs
 - [ ] Standard #0: Keine Duplikate erstellt
 - [ ] **Regression: Alle alten Tests grün**
-- [ ] **Regression: Output identisch zu src-old/**
+- [ ] **Regression: Output identisch zu last/src/**
 
 ### Final Verification
 ```bash
@@ -468,7 +468,7 @@ git commit -m "[CLEAN-0XX] feat(module): implement feature
 
 ✅ QS-Matrix verified (all 8 CLAUDE.md standards)
 ✅ Regression tests: XX/XX passing
-✅ Behaviour identical to src-old/module/
+✅ Behaviour identical to last/src/module/
 ✅ Performance: Within 5% of baseline
 
 All tests passing."
@@ -482,13 +482,13 @@ All tests passing."
 **For EVERY ticket**:
 
 ### 1. Before Starting
-- [ ] Find corresponding src-old/ implementation
-- [ ] Extract existing tests from src-old/
+- [ ] Find corresponding last/src/ implementation
+- [ ] Extract existing tests from last/src/
 - [ ] Document expected inputs/outputs
 - [ ] Create regression test plan for this module
 
 ### 2. During Implementation
-- [ ] Copy tests from src-old/ to src/ (adapt structure, keep assertions)
+- [ ] Copy tests from last/src/ to src/ (adapt structure, keep assertions)
 - [ ] Run tests continuously (`cargo watch -x test`)
 - [ ] Verify outputs match expected behaviour
 
@@ -602,7 +602,7 @@ All tests passing."
 4. ✅ Clear guidelines (allowed vs forbidden differences)
 
 **Result**: 
-- Jedes Ticket: Behaviour-identisch zu src-old/
+- Jedes Ticket: Behaviour-identisch zu last/src/
 - Jede Phase: Regression verification passing
 - Final: 100% compatibility guaranteed
 

@@ -14,7 +14,7 @@
 > "100% neu schreiben, maximale Qualität"
 
 **Strategy**: Clean Room Implementation
-- `src/` → `src-old/` (backup, reference, tests)
+- `src/` → `last/src/` (backup, reference, tests)
 - `src/` rebuilt from scratch with perfect architecture
 - Each module: Design → Implement → Test → Verify
 - QS-Matrix in EVERY ticket for continuous quality
@@ -59,17 +59,32 @@
 
 ## Clean Room Workflow
 
-### Phase 0: Preparation (1h)
+### Phase 0: Preparation (30min)
 
 **Ticket: 001-[PREP]-00**
 
 ```bash
-# 1. Backup current implementation
-mv src src-old
-git add -A
-git commit -m "[CLEAN-001] backup: preserve current implementation as src-old
+# 1. Setup Cargo Workspace
+cat > Cargo.toml << 'EOF'
+[workspace]
+members = ["current", "last"]
+resolver = "2"
+EOF
 
-All functionality preserved in src-old/ for:
+# 2. Move current implementation to last/
+mkdir last
+mv src/ last/
+mv Cargo.toml.backup last/Cargo.toml
+
+# 3. Create new current/ structure
+cargo new current --lib
+cd current
+mkdir -p src/{core,api,store,validate,process,ops}
+
+git add -A
+git commit -m "[CLEAN-001] feat: setup Cargo Workspace (current/ + last/)
+
+All functionality preserved in last/src/ for:
 - Reference during rebuild
 - Test verification
 - Rollback safety
@@ -116,13 +131,13 @@ Ready for module-by-module rebuild."
 - Copyright headers
 
 #### 010-[CORE]-02: Path Utilities (1h)
-- Analyse src-old/ for path operations
+- Analyse last/src/ for path operations
 - Implement centralised path construction
 - `db_dir()`, `table_path()`, `backup_dir()`, `wal_dir()`
 - Tests in `core/paths_test.rs`
 
 #### 010-[CORE]-03: Validation Utilities (1h)
-- Analyse src-old/ for validation logic
+- Analyse last/src/ for validation logic
 - Implement centralised validators
 - `validate_key()`, `validate_table_name()`
 - Tests in `core/validation_test.rs`
@@ -147,7 +162,7 @@ Ready for module-by-module rebuild."
 - `store/btree/tree.rs` - B-Tree implementation
 - `store/btree/node.rs` - Node structures
 - `store/btree/types.rs` - Type definitions
-- Reference: src-old/btree/
+- Reference: last/src/btree/
 - **QS-Matrix applied**: Each file <400 lines, tests separate
 
 #### 020-[STORE]-02: B-Tree Operations (2-3h)
@@ -169,7 +184,7 @@ Ready for module-by-module rebuild."
 - `store/indices/namespace.rs` - Namespace support
 - `store/indices/manager.rs` - Index management
 - `store/indices/builder.rs` - Index builder
-- Reference: src-old/indices/
+- Reference: last/src/indices/
 
 **Deliverable**: Complete storage layer with Smart Indices
 
@@ -190,7 +205,7 @@ Ready for module-by-module rebuild."
 - `validate/rbks/parser.rs` - RBKS key parsing
 - `validate/rbks/validator.rs` - RBKS validation with angle-bracket modifiers
 - `validate/rbks/types.rs` - RBKS types
-- Reference: src-old/schema/rbks.rs
+- Reference: last/src/schema/rbks.rs
 
 **Deliverable**: Schema + RBKS v2 validation
 
@@ -206,7 +221,7 @@ Ready for module-by-module rebuild."
 - `api/db/database.rs` - Database struct
 - `api/db/types.rs` - Type definitions
 - `api/db/stats.rs` - Statistics
-- Reference: src-old/database/
+- Reference: last/src/database/
 
 #### 040-[API]-02: Query Operations (2-3h)
 - `api/db/query.rs` - Query execution
@@ -324,7 +339,7 @@ Ready for module-by-module rebuild."
 ```bash
 # Compare functions src vs src-old
 rg "pub fn" src/ > src-functions.txt
-rg "pub fn" src-old/ > src-old-functions.txt
+rg "pub fn" last/src/ > src-old-functions.txt
 diff src-functions.txt src-old-functions.txt
 
 # Document intentionally not migrated
