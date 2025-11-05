@@ -9,7 +9,7 @@
 **HIGH** - Better structure improves developer experience significantly
 
 ## Estimated Effort
-1 hour (mostly moving files + updating imports)
+2-3 hours (moving files + updating ALL imports across codebase)
 
 ## Context
 Current flat structure makes it unclear what modules do and how they relate.
@@ -233,16 +233,159 @@ pub use validate::schema::RBKSValidator;
 // ... other public exports
 ```
 
-### Step 4: Update Internal Imports
+### Step 4: Update Internal Imports (CRITICAL - Most time consuming!)
 
-This is the time-consuming part. Need to update imports in every file:
+**⚠️ This is the main effort of this ticket! Every import must be updated.**
 
-**Script to help find all imports:**
+#### 4.1 Find All Import Occurrences
+
 ```bash
-# Find all files with old imports
-grep -r "use crate::database::" src/ --include="*.rs" | wc -l
-grep -r "use crate::concurrent::" src/ --include="*.rs" | wc -l
-# ... etc
+cd reedbase
+
+# Create analysis report
+cat > /tmp/import_analysis.sh << 'SCRIPT'
+#!/bin/bash
+echo "=== Import Analysis for Folder Restructure ==="
+echo ""
+
+# Check each old module path
+for module in database reedql bin concurrent conflict merge version \
+              schema functions tables btree indices registry \
+              backup metrics log; do
+  count=$(grep -r "use crate::${module}::" src/ --include="*.rs" 2>/dev/null | wc -l)
+  if [ "$count" -gt 0 ]; then
+    echo "${module}: $count occurrences"
+    grep -r "use crate::${module}::" src/ --include="*.rs" -l 2>/dev/null | head -5
+    echo ""
+  fi
+done
+
+echo "Total files to update:"
+grep -r "use crate::" src/ --include="*.rs" -l | wc -l
+SCRIPT
+
+chmod +x /tmp/import_analysis.sh
+/tmp/import_analysis.sh
+```
+
+This will show you:
+- How many imports per old module
+- Which files need updating
+- Total scope of work
+
+#### 4.2 Import Mapping Reference
+
+**Use this mapping for replacements:**
+
+| Old Import | New Import | Category |
+|------------|------------|----------|
+| `use crate::database::` | `use crate::api::db::` | API |
+| `use crate::reedql::` | `use crate::api::reedql::` | API |
+| `use crate::bin::` | `use crate::api::cli::` | API |
+| `use crate::tables::` | `use crate::store::tables::` | Storage |
+| `use crate::btree::` | `use crate::store::btree::` | Storage |
+| `use crate::indices::` | `use crate::store::indices::` | Storage |
+| `use crate::registry::` | `use crate::store::registry::` | Storage |
+| `use crate::schema::` | `use crate::validate::schema::` | Validation |
+| `use crate::functions::` | `use crate::validate::functions::` | Validation |
+| `use crate::concurrent::` | `use crate::process::locks::` | Process |
+| `use crate::conflict::` | `use crate::process::conflict::` | Process |
+| `use crate::merge::` | `use crate::process::merge::` | Process |
+| `use crate::version::` | `use crate::process::version::` | Process |
+| `use crate::backup::` | `use crate::ops::backup::` | Ops |
+| `use crate::metrics::` | `use crate::ops::metrics::` | Ops |
+| `use crate::log::` | `use crate::ops::log::` | Ops |
+
+#### 4.3 Automated Replacement (Careful!)
+
+```bash
+# Replace all imports across codebase
+# DO THIS CATEGORY BY CATEGORY, TEST AFTER EACH!
+
+# API layer
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::database::/use crate::api::db::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::reedql::/use crate::api::reedql::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::bin::/use crate::api::cli::/g' {} \;
+
+# TEST NOW!
+cargo check
+# Fix any issues before continuing
+
+# Storage layer
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::tables::/use crate::store::tables::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::btree::/use crate::store::btree::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::indices::/use crate::store::indices::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::registry::/use crate::store::registry::/g' {} \;
+
+# TEST NOW!
+cargo check
+
+# Validation layer
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::schema::/use crate::validate::schema::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::functions::/use crate::validate::functions::/g' {} \;
+
+# TEST NOW!
+cargo check
+
+# Process layer
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::concurrent::/use crate::process::locks::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::conflict::/use crate::process::conflict::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::merge::/use crate::process::merge::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::version::/use crate::process::version::/g' {} \;
+
+# TEST NOW!
+cargo check
+
+# Operations layer
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::backup::/use crate::ops::backup::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::metrics::/use crate::ops::metrics::/g' {} \;
+find src -name "*.rs" -type f -exec sed -i '' 's/use crate::log::/use crate::ops::log::/g' {} \;
+
+# FINAL TEST
+cargo check
+```
+
+#### 4.4 Manual Review Required
+
+**Some imports need manual attention:**
+
+1. **Relative imports** (within same module):
+   ```rust
+   // If you're in api/db/types.rs:
+   use super::Database;     // Still correct (same module)
+   use crate::api::db::Query;  // Explicit path
+   ```
+
+2. **Re-exports** might break:
+   ```rust
+   // Check all pub use statements
+   grep -r "pub use" src/ --include="*.rs"
+   ```
+
+3. **Path-based strings** (if any):
+   ```rust
+   // Check for hardcoded module paths in strings
+   grep -r '"database::' src/ --include="*.rs"
+   grep -r '"reedql::' src/ --include="*.rs"
+   ```
+
+#### 4.5 Test Each Layer
+
+After updating each category:
+
+```bash
+# Compile check
+cargo check
+
+# Run tests for that category
+cargo test --lib api::       # After API updates
+cargo test --lib store::     # After storage updates
+cargo test --lib validate::  # After validation updates
+cargo test --lib process::   # After process updates
+cargo test --lib ops::       # After ops updates
+
+# Full test suite
+cargo test --lib
 ```
 
 **Example updates in one file:**
