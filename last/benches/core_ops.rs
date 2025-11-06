@@ -16,7 +16,7 @@
 //! - list_versions: < 10ms for 100 versions
 
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
-use reedbase::tables::Table;
+use reedbase_last::tables::Table;
 use tempfile::TempDir;
 
 /// Generate test content of specified size.

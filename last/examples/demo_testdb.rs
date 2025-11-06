@@ -3,7 +3,7 @@
 
 //! Demo: Testdatenbank anlegen und verwenden
 
-use reedbase::{Database, QueryResult};
+use reedbase_last::{Database, QueryResult};
 use std::path::Path;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

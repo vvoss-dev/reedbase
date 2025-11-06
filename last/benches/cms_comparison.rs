@@ -39,7 +39,7 @@
 //! ```
 
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
-use reedbase::database::Database;
+use reedbase_last::database::Database;
 use tempfile::TempDir;
 
 /// Generates realistic CMS dataset

@@ -17,8 +17,8 @@
 //! - Aggregate query: < 50ms
 
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
-use reedbase::indices::{HashMapIndex, Index, IndexBuilder};
-use reedbase::reedql::{executor::execute, parser::parse};
+use reedbase_last::indices::{HashMapIndex, Index, IndexBuilder};
+use reedbase_last::reedql::{executor::execute, parser::parse};
 use std::collections::HashMap;
 
 /// Create test data for queries.

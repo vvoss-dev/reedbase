@@ -16,10 +16,10 @@
 //! - Backup creation: < 500ms for 10MB
 
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
-use reedbase::backup::{create_backup, restore_backup};
-use reedbase::tables::Table;
-use reedbase::version::delta::{apply_delta, generate_delta};
-use reedbase::version::index::VersionIndices;
+use reedbase_last::backup::{create_backup, restore_backup};
+use reedbase_last::tables::Table;
+use reedbase_last::version::delta::{apply_delta, generate_delta};
+use reedbase_last::version::index::VersionIndices;
 use tempfile::TempDir;
 
 /// Generate test data.
