@@ -125,6 +125,60 @@ last/
 
 ---
 
+## 🚨 GOLDEN RULE: NO SHORTCUTS - COMPLETE PARITY MANDATORY
+
+**⚠️ CRITICAL: This is the MOST IMPORTANT rule in this entire document**
+
+### The Golden Rule
+
+**`last/` is the specification. `current/` must be EXACTLY identical in behaviour.**
+
+**Absolutely FORBIDDEN**:
+- ❌ Simplifying error types ("we only need 10 variants, not 40")
+- ❌ Omitting functions ("this looks unused, let's skip it")
+- ❌ Reducing enum variants ("we can combine these cases")
+- ❌ Skipping trait implementations ("not needed right now")
+- ❌ Abbreviating implementations ("we'll add this later")
+- ❌ "Modernising" or "improving" anything without explicit approval
+
+**Why this rule exists**:
+> "Es muss exakt das gleiche Ergebnis nach dem Refactoring dabei herauskommen. Wenn du jetzt irgendetwas weglässt, fehlt es später und niemand weiss mehr warum!"
+
+**Translation**: The result must be EXACTLY the same after refactoring. If you omit anything now, it will be missing later and nobody will know why!
+
+**The ONLY acceptable approach**:
+1. ✅ Read complete implementation from `last/src/`
+2. ✅ Copy ALL types, ALL variants, ALL functions, ALL traits
+3. ✅ Preserve ALL behaviour, ALL error cases, ALL edge cases
+4. ✅ Adapt tests to verify COMPLETE parity
+5. ✅ Document any INTENTIONAL differences in MIGRATION.md
+
+**When in doubt**:
+- "Should I include this variant?" → **YES**
+- "This function looks unused, skip it?" → **ASK USER** (mit Beweis dass wirklich unbenutzt)
+- "Can I simplify this?" → **ASK USER** (mit konkretem Vorschlag)
+- "Should I ask first?" → **YES**
+
+**What IS allowed**:
+- ✅ **Suggesting improvements** - "This could be solved better with X, shall I?"
+- ✅ **Proposing removals** - "Function Y is provably unused (grep shows 0 calls), remove?"
+- ✅ **Better solutions** - "Pattern Z is cleaner than current approach, switch?"
+- ✅ **Refactoring proposals** - "Duplicated code could be unified, proceed?"
+
+**The key difference**:
+- ❌ **Silently omitting** - Just leaving things out → FORBIDDEN
+- ✅ **Proposing with evidence** - Suggesting with proof → ENCOURAGED
+
+**Examples of violations that MUST be prevented**:
+- Copying ReedError enum with 10 variants when `last/` has 40 variants
+- Implementing `Display` but skipping `std::error::Error` trait
+- Creating "just the essentials" instead of complete API surface
+- Omitting From<T> conversions "for now"
+
+**Remember**: Clean Room Rebuild means **clean**, not **reduced**.
+
+---
+
 ## 🎯 Critical Rules
 
 ### Rule #0: ALWAYS Use Workspace Commands

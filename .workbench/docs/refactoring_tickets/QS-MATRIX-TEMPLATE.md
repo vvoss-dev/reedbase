@@ -4,9 +4,81 @@
 
 ---
 
+## 🚨 GOLDENE REGEL: COMPLETE PARITY - NO SHORTCUTS!
+
+**⚠️ LIES DIES ZUERST - WICHTIGSTE REGEL IM GESAMTEN PROJEKT**
+
+### `last/` ist die Spezifikation. `current/` muss EXAKT identisch sein!
+
+**Absolut VERBOTEN**:
+- ❌ Error-Typen vereinfachen ("wir brauchen nur 10 statt 40 Varianten")
+- ❌ Funktionen weglassen ("sieht unbenutzt aus, lassen wir weg")
+- ❌ Enum-Varianten reduzieren ("können wir kombinieren")
+- ❌ Trait-Implementierungen überspringen ("brauchen wir jetzt nicht")
+- ❌ Abkürzungen nehmen ("fügen wir später hinzu")
+- ❌ "Modernisieren" oder "verbessern" ohne explizite Genehmigung
+
+**Warum diese Regel existiert**:
+> "Es muss exakt das gleiche Ergebnis nach dem Refactoring dabei herauskommen. Wenn du jetzt irgendetwas weglässt, fehlt es später und niemand weiss mehr warum!"
+
+**Der EINZIGE akzeptable Ansatz**:
+1. ✅ Vollständige Implementierung aus `last/src/` lesen
+2. ✅ ALLE Typen, ALLE Varianten, ALLE Funktionen, ALLE Traits kopieren
+3. ✅ ALLE Verhaltensweisen, ALLE Error-Cases, ALLE Edge-Cases bewahren
+4. ✅ Tests adaptieren um VOLLSTÄNDIGE Parität zu verifizieren
+5. ✅ Jede INTENTIONALE Differenz in MIGRATION.md dokumentieren
+
+**Im Zweifelsfall**:
+- "Soll ich diese Variante einschliessen?" → **JA**
+- "Diese Funktion sieht unbenutzt aus, weglassen?" → **USER FRAGEN** (mit Beweis dass wirklich unbenutzt)
+- "Kann ich das vereinfachen?" → **USER FRAGEN** (mit konkretem Vorschlag)
+- "Soll ich zuerst fragen?" → **JA**
+
+**Was IST erlaubt**:
+- ✅ **Verbesserungen vorschlagen** - "Das könnte man besser mit X lösen, soll ich?"
+- ✅ **Entfernungen vorschlagen** - "Funktion Y ist nachweislich unbenutzt (grep zeigt 0 Aufrufe), entfernen?"
+- ✅ **Bessere Lösungen** - "Pattern Z ist sauberer als aktueller Ansatz, wechseln?"
+- ✅ **Refactoring-Vorschläge** - "Duplizierter Code könnte vereint werden, fortfahren?"
+
+**Der Schlüssel-Unterschied**:
+- ❌ **Still weglassen** - Einfach Dinge auslassen → VERBOTEN
+- ✅ **Mit Beweis vorschlagen** - Mit Nachweis vorschlagen → ERWÜNSCHT
+
+**Beispiele für Verstösse die VERHINDERT werden MÜSSEN**:
+- ReedError enum mit 10 Varianten kopieren wenn `last/` 40 Varianten hat
+- `Display` implementieren aber `std::error::Error` trait überspringen
+- "Nur das Wesentliche" erstellen statt kompletter API-Oberfläche
+- From<T> Conversions "fürs Erste" weglassen
+
+**Merke**: Clean Room Rebuild bedeutet **clean** (sauber), nicht **reduced** (reduziert).
+
+---
+
 ## ✅ Integrierte Qualitätssicherungs-Matrix
 
 **Kopiere diesen Abschnitt in jedes Ticket und checke während der Implementierung ab.**
+
+### Goldene Regel Check (MANDATORY - IMMER ZUERST!)
+
+- [ ] **last/src/ vollständig gelesen** - KOMPLETTE Implementierung verstanden
+- [ ] **Alle Typen identifiziert** - Liste ALLER Enums/Structs/Traits aus last/
+- [ ] **Alle Funktionen identifiziert** - Liste ALLER pub fn aus last/
+- [ ] **Alle Trait-Impls identifiziert** - Liste ALLER impl blocks aus last/
+- [ ] **Keine Shortcuts geplant** - Bestätigung: Ich werde NICHTS weglassen
+
+**Check-Kommando**:
+```bash
+# Finde ALLE pub items in last/
+rg "^pub (fn|struct|enum|trait|type|const|static)" last/src/module/file.rs
+
+# Zähle Enum-Varianten
+rg "^\s+\w+.*," last/src/module/file.rs | wc -l
+
+# Finde ALLE trait implementations
+rg "^impl.*for" last/src/module/file.rs
+```
+
+---
 
 ### Standard #0: Code Reuse (MANDATORY CHECK)
 

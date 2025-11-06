@@ -5,17 +5,21 @@
 //!
 //! This is the v0.2.0-beta Clean Room rebuild.
 
-pub mod core;
 pub mod api;
+pub mod core;
+pub mod ops;
+pub mod process;
 pub mod store;
 pub mod validate;
-pub mod process;
-pub mod ops;
 
 pub mod error;
 
+#[cfg(test)]
+#[path = "error_test.rs"]
+mod error_test;
+
 // Re-exports
-pub use error::ReedError;
+pub use error::{ReedError, ReedResult};
 
 /// ReedBase version
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

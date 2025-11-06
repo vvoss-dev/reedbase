@@ -31,13 +31,19 @@ use crate::error::ReedError;
 /// ```
 pub fn validate_key(key: &str) -> Result<(), ReedError> {
     if key.is_empty() {
-        return Err(ReedError::Placeholder); // Will be proper error in 010-[CORE]-04
+        return Err(ReedError::InvalidCsv {
+            reason: "Key cannot be empty".to_string(),
+            line: 0,
+        });
     }
 
     // Check for invalid characters
     for ch in key.chars() {
         if !ch.is_alphanumeric() && ch != '.' && ch != '-' && ch != '_' && ch != '@' {
-            return Err(ReedError::Placeholder);
+            return Err(ReedError::InvalidCsv {
+                reason: format!("Invalid character '{}' in key '{}'", ch, key),
+                line: 0,
+            });
         }
     }
 
@@ -68,20 +74,29 @@ pub fn validate_key(key: &str) -> Result<(), ReedError> {
 /// ```
 pub fn validate_table_name(table_name: &str) -> Result<(), ReedError> {
     if table_name.is_empty() {
-        return Err(ReedError::Placeholder);
+        return Err(ReedError::InvalidCsv {
+            reason: "Table name cannot be empty".to_string(),
+            line: 0,
+        });
     }
 
     // Must start with a letter
     if let Some(first_char) = table_name.chars().next() {
         if !first_char.is_alphabetic() {
-            return Err(ReedError::Placeholder);
+            return Err(ReedError::InvalidCsv {
+                reason: format!("Table name '{}' must start with a letter", table_name),
+                line: 0,
+            });
         }
     }
 
     // Check for invalid characters
     for ch in table_name.chars() {
         if !ch.is_alphanumeric() && ch != '-' && ch != '_' {
-            return Err(ReedError::Placeholder);
+            return Err(ReedError::InvalidCsv {
+                reason: format!("Invalid character '{}' in table name '{}'", ch, table_name),
+                line: 0,
+            });
         }
     }
 
