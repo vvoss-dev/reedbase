@@ -8,6 +8,22 @@
 
 ## 🚀 Quick Start for New Sessions
 
+### FIRST: Read Session Handover
+
+**⚠️ CRITICAL - Read this FIRST in every new session**:
+```bash
+cat .workbench/docs/SESSION_HANDOVER.md
+```
+
+**What it contains**:
+- Current project status (what phase are we in?)
+- What's been completed since last session
+- Next steps to execute
+- Critical warnings and context
+- Update history from previous sessions
+
+**Time**: 2-3 minutes → fully oriented about project state
+
 ### When You Get a Ticket
 
 **Step 1: Orientierung (30 seconds)**
@@ -460,6 +476,7 @@ rg "^pub fn" current/src/core/ | wc -l
 
 | What | Where |
 |------|-------|
+| **Session handover** | `.workbench/docs/SESSION_HANDOVER.md` ⭐ READ FIRST |
 | **Workspace commands** | `.workbench/docs/refactoring_tickets/WORKSPACE-CHEATSHEET.md` |
 | **QS checklist** | `.workbench/docs/refactoring_tickets/QS-MATRIX-TEMPLATE.md` |
 | **Regression protocol** | `.workbench/docs/refactoring_tickets/REGRESSION-TESTING-PROTOCOL.md` |
@@ -467,8 +484,8 @@ rg "^pub fn" current/src/core/ | wc -l
 | **Execution order** | `.workbench/docs/refactoring_tickets/EXECUTION-ORDER-CLEANROOM.md` |
 | **Tickets** | `.workbench/docs/refactoring_tickets/0XX-[MODULE]-YY-*.md` |
 | **Scripts** | `scripts/quality-check.sh`, `scripts/regression-verify.sh` |
-| **Old code** | `last/src/` |
-| **New code** | `current/src/` |
+| **Old code** | `last/src/` (after 001 complete) |
+| **New code** | `current/src/` (after 001 complete) |
 | **Test data** | `.reed/tables/`, `.reedbase/` |
 | **Benchmarks** | `benches/` |
 
