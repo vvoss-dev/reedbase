@@ -35,8 +35,8 @@ fn generate_content(size: usize) -> Vec<u8> {
 fn bench_concurrent_reads(c: &mut Criterion) {
     let temp_dir = TempDir::new().unwrap();
     let db_path = temp_dir.path().join(".reed");
-    reedbase::registry::init_registry(&db_path).unwrap();
-    reedbase::registry::set_base_path(db_path.clone());
+    reedbase_last::registry::init_registry(&db_path).unwrap();
+    reedbase_last::registry::set_base_path(db_path.clone());
 
     let table = Arc::new(Table::new(&db_path, "concurrent_bench"));
     let content = generate_content(10_240);
@@ -219,8 +219,8 @@ fn bench_mixed_workload(c: &mut Criterion) {
         b.iter(|| {
             let temp_dir = TempDir::new().unwrap();
             let db_path = temp_dir.path().join(".reed");
-            reedbase::registry::init_registry(&db_path).unwrap();
-            reedbase::registry::set_base_path(db_path.clone());
+            reedbase_last::registry::init_registry(&db_path).unwrap();
+            reedbase_last::registry::set_base_path(db_path.clone());
 
             let table = Arc::new(Table::new(&db_path, "mixed_bench"));
             let content = generate_content(1024);
@@ -273,8 +273,8 @@ fn bench_write_throughput(c: &mut Criterion) {
         b.iter(|| {
             let temp_dir = TempDir::new().unwrap();
             let db_path = temp_dir.path().join(".reed");
-            reedbase::registry::init_registry(&db_path).unwrap();
-            reedbase::registry::set_base_path(db_path.clone());
+            reedbase_last::registry::init_registry(&db_path).unwrap();
+            reedbase_last::registry::set_base_path(db_path.clone());
 
             let table = Table::new(&db_path, "seq_writes");
             let mut content = generate_content(1024);
@@ -292,8 +292,8 @@ fn bench_write_throughput(c: &mut Criterion) {
         b.iter(|| {
             let temp_dir = TempDir::new().unwrap();
             let db_path = temp_dir.path().join(".reed");
-            reedbase::registry::init_registry(&db_path).unwrap();
-            reedbase::registry::set_base_path(db_path.clone());
+            reedbase_last::registry::init_registry(&db_path).unwrap();
+            reedbase_last::registry::set_base_path(db_path.clone());
 
             let table = Arc::new(Table::new(&db_path, "conc_writes"));
             let content = generate_content(1024);

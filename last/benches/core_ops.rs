@@ -33,8 +33,8 @@ fn bench_read_current(c: &mut Criterion) {
     for size in [1024, 10_240, 102_400, 1_024_000].iter() {
         let temp_dir = TempDir::new().unwrap();
         let db_path = temp_dir.path().join(".reed");
-        reedbase::registry::init_registry(&db_path).unwrap();
-        reedbase::registry::set_base_path(db_path.clone());
+        reedbase_last::registry::init_registry(&db_path).unwrap();
+        reedbase_last::registry::set_base_path(db_path.clone());
 
         let table = Table::new(&db_path, "bench_read");
         let content = generate_content(*size);
@@ -65,8 +65,8 @@ fn bench_write_with_delta(c: &mut Criterion) {
                 || {
                     let temp_dir = TempDir::new().unwrap();
                     let db_path = temp_dir.path().join(".reed");
-                    reedbase::registry::init_registry(&db_path).unwrap();
-                    reedbase::registry::set_base_path(db_path.clone());
+                    reedbase_last::registry::init_registry(&db_path).unwrap();
+                    reedbase_last::registry::set_base_path(db_path.clone());
 
                     let table = Table::new(&db_path, "bench_write");
                     let content = generate_content(bytes);
@@ -106,8 +106,8 @@ fn bench_list_versions(c: &mut Criterion) {
                     || {
                         let temp_dir = TempDir::new().unwrap();
                         let db_path = temp_dir.path().join(".reed");
-                        reedbase::registry::init_registry(&db_path).unwrap();
-                        reedbase::registry::set_base_path(db_path.clone());
+                        reedbase_last::registry::init_registry(&db_path).unwrap();
+                        reedbase_last::registry::set_base_path(db_path.clone());
 
                         let table = Table::new(&db_path, "bench_versions");
                         let mut content = generate_content(1024);
@@ -149,8 +149,8 @@ fn bench_rollback(c: &mut Criterion) {
                     || {
                         let temp_dir = TempDir::new().unwrap();
                         let db_path = temp_dir.path().join(".reed");
-                        reedbase::registry::init_registry(&db_path).unwrap();
-                        reedbase::registry::set_base_path(db_path.clone());
+                        reedbase_last::registry::init_registry(&db_path).unwrap();
+                        reedbase_last::registry::set_base_path(db_path.clone());
 
                         let table = Table::new(&db_path, "bench_rollback");
                         let mut content = generate_content(10_240);
@@ -197,8 +197,8 @@ fn bench_read_as_rows(c: &mut Criterion) {
                     || {
                         let temp_dir = TempDir::new().unwrap();
                         let db_path = temp_dir.path().join(".reed");
-                        reedbase::registry::init_registry(&db_path).unwrap();
-                        reedbase::registry::set_base_path(db_path.clone());
+                        reedbase_last::registry::init_registry(&db_path).unwrap();
+                        reedbase_last::registry::set_base_path(db_path.clone());
 
                         let table = Table::new(&db_path, "bench_rows");
 
@@ -229,8 +229,8 @@ fn bench_read_as_rows(c: &mut Criterion) {
 fn bench_exists_check(c: &mut Criterion) {
     let temp_dir = TempDir::new().unwrap();
     let db_path = temp_dir.path().join(".reed");
-    reedbase::registry::init_registry(&db_path).unwrap();
-    reedbase::registry::set_base_path(db_path.clone());
+    reedbase_last::registry::init_registry(&db_path).unwrap();
+    reedbase_last::registry::set_base_path(db_path.clone());
 
     let table = Table::new(&db_path, "bench_exists");
     table.init(b"test content", "system").unwrap();
@@ -251,8 +251,8 @@ fn bench_concurrent_reads(c: &mut Criterion) {
 
     let temp_dir = TempDir::new().unwrap();
     let db_path = temp_dir.path().join(".reed");
-    reedbase::registry::init_registry(&db_path).unwrap();
-    reedbase::registry::set_base_path(db_path.clone());
+    reedbase_last::registry::init_registry(&db_path).unwrap();
+    reedbase_last::registry::set_base_path(db_path.clone());
 
     let table = Arc::new(Table::new(&db_path, "bench_concurrent"));
     let content = generate_content(10_240);
