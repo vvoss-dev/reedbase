@@ -29,6 +29,8 @@
 //! # Ok::<(), reedbase::ReedError>(())
 //! ```
 
+mod node;
+mod page;
 mod types;
 mod wal;
 
@@ -36,7 +38,13 @@ mod wal;
 #[path = "types_test.rs"]
 mod types_test;
 
+#[cfg(test)]
+#[path = "page_test.rs"]
+mod page_test;
+
 // Re-export public API
+pub use node::{InternalNode, LeafNode};
+pub use page::{DATA_SIZE, HEADER_SIZE, PAGE_SIZE, Page, PageHeader};
 pub use types::{BTREE_MAGIC, NodeType, Order, PageId};
 pub use wal::{WalEntry, WriteAheadLog};
 
