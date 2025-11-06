@@ -17,7 +17,7 @@
 
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use reedbase_last::concurrent::TableLock;
-use reedbase_last::merge::auto_merge;
+// use reedbase_last::merge::auto_merge; // API not implemented
 use reedbase_last::tables::Table;
 use std::collections::HashMap;
 use std::sync::Arc;
