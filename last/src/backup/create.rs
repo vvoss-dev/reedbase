@@ -34,7 +34,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::backup::create_backup;
+/// use reedbase_last::backup::create_backup;
 /// use std::path::Path;
 ///
 /// let backup = create_backup(Path::new(".reed"))?;

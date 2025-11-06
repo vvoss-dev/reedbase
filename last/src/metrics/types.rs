@@ -14,7 +14,7 @@ use std::collections::HashMap;
 ///
 /// ## Example
 /// ```
-/// use reedbase::metrics::types::{Metric, MetricUnit};
+/// use reedbase_last::metrics::types::{Metric, MetricUnit};
 ///
 /// let metric = Metric::new("query_duration", 1250.0, MetricUnit::Microseconds)
 ///     .with_tag("table", "text")
@@ -90,7 +90,7 @@ impl Metric {
     ///
     /// ## Example
     /// ```
-    /// use reedbase::metrics::types::{Metric, MetricUnit};
+    /// use reedbase_last::metrics::types::{Metric, MetricUnit};
     ///
     /// let metric = Metric::new("test", 1250.0, MetricUnit::Microseconds);
     /// let formatted = metric.format_value();
@@ -149,7 +149,7 @@ impl MetricUnit {
     ///
     /// ## Example
     /// ```
-    /// use reedbase::metrics::types::MetricUnit;
+    /// use reedbase_last::metrics::types::MetricUnit;
     ///
     /// assert_eq!(MetricUnit::Microseconds.suffix(), "μs");
     /// assert_eq!(MetricUnit::Megabytes.suffix(), "MB");

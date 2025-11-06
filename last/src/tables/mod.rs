@@ -22,7 +22,7 @@
 //! ## Example Usage
 //!
 //! ```no_run
-//! use reedbase::tables::Table;
+//! use reedbase_last::tables::Table;
 //! use std::path::Path;
 //!
 //! // Create table reference

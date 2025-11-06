@@ -42,7 +42,7 @@
 //!
 //! ## Example Usage
 //! ```rust,ignore
-//! use reedbase::reedql::{parse, execute};
+//! use reedbase_last::reedql::{parse, execute};
 //!
 //! // Parse query
 //! let query = parse("SELECT * FROM text WHERE key LIKE '%.@de' LIMIT 10")?;

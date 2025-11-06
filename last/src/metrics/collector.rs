@@ -27,8 +27,8 @@ static METRICS_COLLECTOR: Lazy<Arc<MetricsCollector>> =
 ///
 /// ## Example
 /// ```
-/// use reedbase::metrics::collector::MetricsCollector;
-/// use reedbase::metrics::types::{Metric, MetricUnit};
+/// use reedbase_last::metrics::collector::MetricsCollector;
+/// use reedbase_last::metrics::types::{Metric, MetricUnit};
 ///
 /// // Record a metric
 /// let metric = Metric::new("query_duration", 1250.0, MetricUnit::Microseconds)
@@ -63,7 +63,7 @@ impl MetricsCollector {
     ///
     /// ## Example
     /// ```
-    /// use reedbase::MetricsCollector;
+    /// use reedbase_last::MetricsCollector;
     ///
     /// let collector = MetricsCollector::global();
     /// ```

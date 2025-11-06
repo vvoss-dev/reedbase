@@ -17,7 +17,7 @@
 //! ## Quick Start
 //!
 //! ```rust
-//! use reedbase::metrics::{MetricsCollector, Metric, MetricUnit};
+//! use reedbase_last::metrics::{MetricsCollector, Metric, MetricUnit};
 //!
 //! // Record a performance metric
 //! let metric = Metric::new("query_duration", 1250.0, MetricUnit::Microseconds)

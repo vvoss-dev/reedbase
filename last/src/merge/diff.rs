@@ -28,8 +28,8 @@ use std::collections::HashSet;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::{calculate_diff, RowChange};
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::{calculate_diff, RowChange};
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let old = vec![CsvRow::new("1", vec!["Alice", "30"])];
 /// let new = vec![CsvRow::new("1", vec!["Alice", "31"])];
@@ -92,8 +92,8 @@ pub fn calculate_diff(old: &[CsvRow], new: &[CsvRow]) -> ReedResult<Vec<RowChang
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::{apply_changes, RowChange};
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::{apply_changes, RowChange};
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let base = vec![CsvRow::new("1", vec!["Alice", "30"])];
 /// let changes = vec![RowChange::Update(CsvRow::new("1", vec!["Alice", "31"]))];
@@ -139,8 +139,8 @@ pub fn apply_changes(base: &[CsvRow], changes: &[RowChange]) -> ReedResult<Vec<C
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::{count_changes, RowChange};
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::{count_changes, RowChange};
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let changes = vec![
 ///     RowChange::Insert(CsvRow::new("1", vec![])),

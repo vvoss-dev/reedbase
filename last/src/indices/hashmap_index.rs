@@ -17,8 +17,8 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::indices::hashmap_index::HashMapIndex;
-//! use reedbase::indices::Index;
+//! use reedbase_last::indices::hashmap_index::HashMapIndex;
+//! use reedbase_last::indices::Index;
 //!
 //! let mut index = HashMapIndex::<String, Vec<usize>>::new();
 //!
@@ -68,7 +68,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::hashmap_index::HashMapIndex;
+    /// use reedbase_last::indices::hashmap_index::HashMapIndex;
     ///
     /// let index = HashMapIndex::<String, Vec<usize>>::new();
     /// ```
@@ -92,7 +92,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::hashmap_index::HashMapIndex;
+    /// use reedbase_last::indices::hashmap_index::HashMapIndex;
     ///
     /// let index = HashMapIndex::<String, Vec<usize>>::with_capacity(1000);
     /// ```
@@ -164,7 +164,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{hashmap_index::HashMapIndex, Index};
+    /// use reedbase_last::indices::{hashmap_index::HashMapIndex, Index};
     ///
     /// let mut index = HashMapIndex::new();
     /// index.insert("page".to_string(), vec![1, 2])?;
@@ -213,7 +213,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{hashmap_index::HashMapIndex, Index};
+    /// use reedbase_last::indices::{hashmap_index::HashMapIndex, Index};
     ///
     /// let mut index = HashMapIndex::new();
     /// index.insert("page".to_string(), vec![1, 2])?;
@@ -239,7 +239,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{hashmap_index::HashMapIndex, Index};
+    /// use reedbase_last::indices::{hashmap_index::HashMapIndex, Index};
     ///
     /// let mut index = HashMapIndex::new();
     /// index.insert("page".to_string(), vec![1, 2])?;
@@ -265,7 +265,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{hashmap_index::HashMapIndex, Index};
+    /// use reedbase_last::indices::{hashmap_index::HashMapIndex, Index};
     ///
     /// let mut index = HashMapIndex::new();
     /// index.insert("page".to_string(), vec![1, 2])?;

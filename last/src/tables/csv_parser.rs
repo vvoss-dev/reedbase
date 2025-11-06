@@ -25,7 +25,7 @@ use crate::tables::types::CsvRow;
 ///
 /// ## Example Usage
 /// ```
-/// use reedbase::tables::parse_csv;
+/// use reedbase_last::tables::parse_csv;
 ///
 /// let csv = b"key|value\nfoo|bar\nbaz|qux\n";
 /// let rows = parse_csv(csv)?;

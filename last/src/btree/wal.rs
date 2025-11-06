@@ -42,7 +42,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::btree::wal::{WriteAheadLog, WalEntry};
+//! use reedbase_last::btree::wal::{WriteAheadLog, WalEntry};
 //!
 //! // Open or create WAL
 //! let mut wal = WriteAheadLog::open("index.wal")?;
@@ -171,7 +171,7 @@ impl WriteAheadLog {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::wal::WriteAheadLog;
+    /// use reedbase_last::btree::wal::WriteAheadLog;
     ///
     /// let wal = WriteAheadLog::open("index.wal")?;
     /// # Ok::<(), reedbase::ReedError>(())
@@ -216,7 +216,7 @@ impl WriteAheadLog {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::wal::WriteAheadLog;
+    /// use reedbase_last::btree::wal::WriteAheadLog;
     ///
     /// let mut wal = WriteAheadLog::open("index.wal")?;
     /// wal.log_insert("key".to_string(), vec![1, 2, 3])?;
@@ -294,7 +294,7 @@ impl WriteAheadLog {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::wal::WriteAheadLog;
+    /// use reedbase_last::btree::wal::WriteAheadLog;
     ///
     /// let mut wal = WriteAheadLog::open("index.wal")?;
     /// wal.log_delete("key".to_string())?;
@@ -363,7 +363,7 @@ impl WriteAheadLog {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::wal::{WriteAheadLog, WalEntry};
+    /// use reedbase_last::btree::wal::{WriteAheadLog, WalEntry};
     ///
     /// let wal = WriteAheadLog::open("index.wal")?;
     /// let entries = wal.replay()?;
@@ -512,7 +512,7 @@ impl WriteAheadLog {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::wal::WriteAheadLog;
+    /// use reedbase_last::btree::wal::WriteAheadLog;
     ///
     /// let mut wal = WriteAheadLog::open("index.wal")?;
     /// let entries = wal.replay()?;
@@ -559,7 +559,7 @@ impl WriteAheadLog {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::wal::WriteAheadLog;
+    /// use reedbase_last::btree::wal::WriteAheadLog;
     ///
     /// let mut wal = WriteAheadLog::open("index.wal")?;
     ///

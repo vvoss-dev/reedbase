@@ -29,7 +29,7 @@ use std::sync::{Arc, RwLock};
 ///
 /// ## Example
 /// ```no_run
-/// use reedbase::database::Database;
+/// use reedbase_last::database::Database;
 ///
 /// // Open database
 /// let db = Database::open(".reed")?;
@@ -85,7 +85,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// # Ok::<(), reedbase::ReedError>(())
@@ -134,7 +134,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::{Database, AutoIndexConfig};
+    /// use reedbase_last::database::{Database, AutoIndexConfig};
     ///
     /// let config = AutoIndexConfig::reedcms_optimized();
     /// let db = Database::open_with_config(".reed", config)?;
@@ -161,7 +161,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// let result = db.query("SELECT * FROM text WHERE key = 'page.title@de'")?;
@@ -189,7 +189,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// db.execute("INSERT INTO text (key, value) VALUES ('page.title@de', 'Willkommen')", "admin")?;
@@ -214,7 +214,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// db.create_table("users", None)?;
@@ -272,7 +272,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// db.create_index("text", "key")?;
@@ -291,7 +291,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// let tables = db.list_tables()?;
@@ -311,7 +311,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// let indices = db.list_indices();
@@ -332,7 +332,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// let stats = db.stats();
@@ -353,7 +353,7 @@ impl Database {
     ///
     /// ## Example
     /// ```no_run
-    /// use reedbase::database::Database;
+    /// use reedbase_last::database::Database;
     ///
     /// let db = Database::open(".reed")?;
     /// // ... use database ...

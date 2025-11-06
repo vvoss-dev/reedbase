@@ -15,7 +15,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::functions::aggregations::{count, sum, avg, min, max};
+//! use reedbase_last::functions::aggregations::{count, sum, avg, min, max};
 //!
 //! // Count rows
 //! let total = count("users")?; // "1250"

@@ -9,7 +9,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::indices::builder::{IndexBuilder, IndexConfig, IndexBackend};
+//! use reedbase_last::indices::builder::{IndexBuilder, IndexConfig, IndexBackend};
 //! use std::path::Path;
 //!
 //! // Create from configuration
@@ -68,7 +68,7 @@ impl Default for IndexBackend {
 ///
 /// ## Example
 /// ```rust
-/// use reedbase::indices::builder::{IndexConfig, IndexBackend};
+/// use reedbase_last::indices::builder::{IndexConfig, IndexBackend};
 ///
 /// let config = IndexConfig {
 ///     backend: IndexBackend::BTree,
@@ -129,7 +129,7 @@ impl IndexBuilder {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::builder::{IndexBuilder, IndexConfig};
+    /// use reedbase_last::indices::builder::{IndexBuilder, IndexConfig};
     ///
     /// let config = IndexConfig::default();
     /// let builder = IndexBuilder::new(config);
@@ -149,7 +149,7 @@ impl IndexBuilder {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::builder::IndexBuilder;
+    /// use reedbase_last::indices::builder::IndexBuilder;
     ///
     /// let toml = r#"
     /// backend = "btree"
@@ -179,7 +179,7 @@ impl IndexBuilder {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::builder::{IndexBuilder, IndexConfig};
+    /// use reedbase_last::indices::builder::{IndexBuilder, IndexConfig};
     ///
     /// let config = IndexConfig::default();
     /// let builder = IndexBuilder::new(config);
@@ -209,7 +209,7 @@ impl IndexBuilder {
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::builder::{IndexBuilder, IndexConfig};
+    /// use reedbase_last::indices::builder::{IndexBuilder, IndexConfig};
     ///
     /// let config = IndexConfig::default();
     /// let builder = IndexBuilder::new(config);

@@ -38,7 +38,7 @@ pub struct VersionEntry {
 ///
 /// ## Example
 /// ```rust,ignore
-/// use reedbase::version::rebuild_indices;
+/// use reedbase_last::version::rebuild_indices;
 ///
 /// rebuild_indices(
 ///     ".reed/flow/versions.log",

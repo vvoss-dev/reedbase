@@ -14,7 +14,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::functions::cache::{CacheKey, get_cache};
+//! use reedbase_last::functions::cache::{CacheKey, get_cache};
 //!
 //! let key = CacheKey::new("calculate_age", vec!["1990-05-15"]);
 //!
@@ -278,7 +278,7 @@ static FUNCTION_CACHE: Lazy<FunctionCache> = Lazy::new(FunctionCache::new);
 ///
 /// ## Example
 /// ```rust
-/// use reedbase::functions::cache::{CacheKey, get_cache};
+/// use reedbase_last::functions::cache::{CacheKey, get_cache};
 ///
 /// let key = CacheKey::new("test", vec!["arg1"]);
 /// get_cache().insert(key.clone(), "result".to_string());

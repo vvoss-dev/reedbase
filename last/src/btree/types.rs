@@ -38,7 +38,7 @@ pub type PageId = u32;
 ///
 /// ## Example
 /// ```rust
-/// use reedbase::btree::types::Order;
+/// use reedbase_last::btree::types::Order;
 ///
 /// let order = Order::new(100)?; // 100 keys per leaf, 101 children per internal node
 /// assert_eq!(order.max_keys(), 100);

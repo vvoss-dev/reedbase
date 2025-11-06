@@ -40,7 +40,7 @@ use std::path::Path;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::backup::restore_point_in_time;
+/// use reedbase_last::backup::restore_point_in_time;
 /// use std::path::Path;
 /// use std::time::{SystemTime, UNIX_EPOCH};
 ///

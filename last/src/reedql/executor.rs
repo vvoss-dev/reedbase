@@ -358,8 +358,8 @@ fn aggregate(
 ///
 /// ## Example
 /// ```rust,ignore
-/// use reedbase::reedql::{parse, OptimizedExecutor};
-/// use reedbase::indices::BTreeIndex;
+/// use reedbase_last::reedql::{parse, OptimizedExecutor};
+/// use reedbase_last::indices::BTreeIndex;
 ///
 /// // Create executor with index
 /// let hierarchy_index = BTreeIndex::open("hierarchy.idx", Order::new(100)?)?;

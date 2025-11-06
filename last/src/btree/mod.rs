@@ -26,7 +26,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::btree::{BPlusTree, Order};
+//! use reedbase_last::btree::{BPlusTree, Order};
 //!
 //! // Create or open B+-Tree
 //! let order = Order::new(512)?; // 512 keys per node

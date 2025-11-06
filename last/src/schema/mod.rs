@@ -52,7 +52,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::schema::{
+//! use reedbase_last::schema::{
 //!     validate_key, parse_key, normalize_key,
 //!     Schema, ColumnDef, validate_row, CsvRow,
 //! };

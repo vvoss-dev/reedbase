@@ -210,7 +210,7 @@ fn load_users_dict() -> ReedResult<()> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::get_action_name;
+/// use reedbase_last::registry::get_action_name;
 ///
 /// let name = get_action_name(2)?; // "update"
 /// # Ok::<(), reedbase::ReedError>(())
@@ -248,7 +248,7 @@ pub fn get_action_name(code: u8) -> ReedResult<String> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::get_action_code;
+/// use reedbase_last::registry::get_action_code;
 ///
 /// let code = get_action_code("update")?; // 2
 /// let code2 = get_action_code("UPDATE")?; // 2 (case-insensitive)
@@ -287,7 +287,7 @@ pub fn get_action_code(name: &str) -> ReedResult<u8> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::get_username;
+/// use reedbase_last::registry::get_username;
 ///
 /// let name = get_username(0)?; // "system"
 /// # Ok::<(), reedbase::ReedError>(())
@@ -326,7 +326,7 @@ pub fn get_username(code: u32) -> ReedResult<String> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::get_or_create_user_code;
+/// use reedbase_last::registry::get_or_create_user_code;
 ///
 /// let code = get_or_create_user_code("alice")?; // 1 (first call)
 /// let code2 = get_or_create_user_code("alice")?; // 1 (cached)
@@ -423,7 +423,7 @@ pub fn get_or_create_user_code(username: &str) -> ReedResult<u32> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::reload_dictionaries;
+/// use reedbase_last::registry::reload_dictionaries;
 ///
 /// reload_dictionaries()?;
 /// # Ok::<(), reedbase::ReedError>(())

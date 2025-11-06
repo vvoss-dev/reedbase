@@ -29,8 +29,8 @@ use std::collections::HashMap;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::{merge_changes, MergeResult};
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::{merge_changes, MergeResult};
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let base = vec![CsvRow::new("1", vec!["Alice", "30"])];
 /// let changes_a = vec![CsvRow::new("1", vec!["Alice", "31"])];
@@ -101,8 +101,8 @@ pub fn merge_changes(
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::merge_single;
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::merge_single;
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let base = vec![CsvRow::new("1", vec!["Alice", "30"])];
 /// let changes = vec![CsvRow::new("2", vec!["Bob", "25"])];
@@ -138,8 +138,8 @@ pub fn merge_single(base: &[CsvRow], changes: &[CsvRow]) -> ReedResult<Vec<CsvRo
 ///
 /// ## Example Usage
 /// ```rust
-/// use reedbase::merge::csv::build_row_map;
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::csv::build_row_map;
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let rows = vec![CsvRow::new("1", vec!["Alice"])];
 /// let map = build_row_map(&rows);
@@ -166,8 +166,8 @@ pub fn build_row_map(rows: &[CsvRow]) -> HashMap<String, CsvRow> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::detect_conflicts;
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::detect_conflicts;
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let changes_a = vec![CsvRow::new("1", vec!["Alice", "31"])];
 /// let changes_b = vec![CsvRow::new("1", vec!["Alice", "32"])];
@@ -200,8 +200,8 @@ pub fn detect_conflicts(changes_a: &[CsvRow], changes_b: &[CsvRow]) -> Vec<Strin
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::rows_equal;
-/// use reedbase::concurrent::types::CsvRow;
+/// use reedbase_last::merge::rows_equal;
+/// use reedbase_last::concurrent::types::CsvRow;
 ///
 /// let row_a = CsvRow::new("1", vec!["Alice", "30"]);
 /// let row_b = CsvRow::new("1", vec!["Alice", "30"]);
@@ -228,7 +228,7 @@ pub fn rows_equal(row_a: &CsvRow, row_b: &CsvRow) -> bool {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::merge::calculate_merge_stats;
+/// use reedbase_last::merge::calculate_merge_stats;
 ///
 /// let stats = calculate_merge_stats(100, 105, 2);
 /// assert_eq!(stats.added, 5);

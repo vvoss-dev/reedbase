@@ -15,8 +15,8 @@
 //!
 //! ## Example Usage
 //! ```rust
-//! use reedbase::conflict::{resolve_conflict, ResolutionStrategy};
-//! use reedbase::concurrent::types::CsvRow;
+//! use reedbase_last::conflict::{resolve_conflict, ResolutionStrategy};
+//! use reedbase_last::concurrent::types::CsvRow;
 //! use std::path::Path;
 //!
 //! let base = CsvRow {

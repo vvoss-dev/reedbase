@@ -38,7 +38,7 @@ pub struct MetricStats {
 ///
 /// ## Example
 /// ```
-/// use reedbase::metrics::aggregator::calculate_stats;
+/// use reedbase_last::metrics::aggregator::calculate_stats;
 ///
 /// let values = vec![1.0, 2.0, 3.0, 4.0, 5.0];
 /// let stats = calculate_stats(&values).unwrap();
@@ -95,7 +95,7 @@ pub fn calculate_stats(values: &[f64]) -> Option<MetricStats> {
 ///
 /// ## Example
 /// ```
-/// use reedbase::metrics::aggregator::percentile;
+/// use reedbase_last::metrics::aggregator::percentile;
 ///
 /// let mut values = vec![1.0, 2.0, 3.0, 4.0, 5.0];
 /// values.sort_by(|a, b| a.partial_cmp(b).unwrap());

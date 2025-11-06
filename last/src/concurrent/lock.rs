@@ -31,7 +31,7 @@ use std::time::{Duration, Instant};
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::acquire_lock;
+/// use reedbase_last::concurrent::acquire_lock;
 /// use std::time::Duration;
 /// use std::path::Path;
 ///
@@ -124,7 +124,7 @@ impl Drop for TableLock {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::is_locked;
+/// use reedbase_last::concurrent::is_locked;
 /// use std::path::Path;
 ///
 /// if is_locked(Path::new(".reed"), "users")? {
@@ -168,7 +168,7 @@ pub fn is_locked(base_path: &Path, table_name: &str) -> ReedResult<bool> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::wait_for_unlock;
+/// use reedbase_last::concurrent::wait_for_unlock;
 /// use std::time::Duration;
 /// use std::path::Path;
 ///

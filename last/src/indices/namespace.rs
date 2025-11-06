@@ -12,8 +12,8 @@
 //!
 //! ## Example Usage
 //! ```rust
-//! use reedbase::indices::namespace::NamespaceIndex;
-//! use reedbase::indices::types::KeyIndex;
+//! use reedbase_last::indices::namespace::NamespaceIndex;
+//! use reedbase_last::indices::types::KeyIndex;
 //!
 //! let mut index = NamespaceIndex::new();
 //!

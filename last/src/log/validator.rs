@@ -29,7 +29,7 @@ use std::path::Path;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::validate_log;
+/// use reedbase_last::log::validate_log;
 /// use std::path::Path;
 ///
 /// let report = validate_log(Path::new(".reedbase/tables/text/version.log"))?;
@@ -95,7 +95,7 @@ pub fn validate_log(log_path: &Path) -> ReedResult<ValidationReport> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::validate_and_truncate_log;
+/// use reedbase_last::log::validate_and_truncate_log;
 /// use std::path::Path;
 ///
 /// // Call on startup to ensure log consistency
@@ -175,7 +175,7 @@ pub fn validate_and_truncate_log(log_path: &Path) -> ReedResult<ValidationReport
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::{encode_log_entry, append_entry};
+/// use reedbase_last::log::{encode_log_entry, append_entry};
 /// use std::path::Path;
 ///
 /// let encoded = encode_log_entry(&entry)?;

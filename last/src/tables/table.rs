@@ -52,7 +52,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "text");
@@ -130,7 +130,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```no_run
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "text");
@@ -201,7 +201,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```no_run
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "text");
@@ -257,7 +257,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```no_run
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "text");
@@ -478,7 +478,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```no_run
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "text");
@@ -590,7 +590,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```no_run
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "text");
@@ -665,7 +665,7 @@ impl Table {
     ///
     /// ## Example Usage
     /// ```no_run
-    /// use reedbase::tables::Table;
+    /// use reedbase_last::tables::Table;
     /// use std::path::Path;
     ///
     /// let table = Table::new(Path::new(".reed"), "old_table");

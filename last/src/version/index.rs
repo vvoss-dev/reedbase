@@ -16,7 +16,7 @@
 //!
 //! ## Example
 //! ```rust,ignore
-//! use reedbase::version::{VersionIndices, Timestamp};
+//! use reedbase_last::version::{VersionIndices, Timestamp};
 //!
 //! // Open indices
 //! let mut indices = VersionIndices::open_or_create(

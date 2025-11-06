@@ -24,7 +24,7 @@ use std::path::Path;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::backup::list_backups;
+/// use reedbase_last::backup::list_backups;
 /// use std::path::Path;
 ///
 /// let backups = list_backups(Path::new(".reed"))?;

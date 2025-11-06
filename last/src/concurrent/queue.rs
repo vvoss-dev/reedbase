@@ -30,7 +30,7 @@ use uuid::Uuid;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::{queue_write, types::{PendingWrite, WriteOperation, CsvRow}};
+/// use reedbase_last::concurrent::{queue_write, types::{PendingWrite, WriteOperation, CsvRow}};
 /// use std::path::Path;
 ///
 /// let write = PendingWrite {
@@ -95,7 +95,7 @@ pub fn queue_write(
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::{get_next_pending, remove_from_queue};
+/// use reedbase_last::concurrent::{get_next_pending, remove_from_queue};
 /// use std::path::Path;
 ///
 /// while let Some((id, write)) = get_next_pending(Path::new(".reed"), "users")? {
@@ -171,7 +171,7 @@ pub fn get_next_pending(
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::remove_from_queue;
+/// use reedbase_last::concurrent::remove_from_queue;
 /// use std::path::Path;
 ///
 /// remove_from_queue(Path::new(".reed"), "users", "550e8400-e29b-41d4-a716-446655440000")?;
@@ -205,7 +205,7 @@ pub fn remove_from_queue(base_path: &Path, table_name: &str, queue_id: &str) -> 
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::concurrent::count_pending;
+/// use reedbase_last::concurrent::count_pending;
 /// use std::path::Path;
 ///
 /// let pending = count_pending(Path::new(".reed"), "users")?;

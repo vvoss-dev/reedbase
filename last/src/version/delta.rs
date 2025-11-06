@@ -40,7 +40,7 @@ pub struct DeltaInfo {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::version::generate_delta;
+/// use reedbase_last::version::generate_delta;
 /// use std::path::Path;
 ///
 /// let info = generate_delta(
@@ -109,7 +109,7 @@ pub fn generate_delta<P: AsRef<Path>>(
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::version::apply_delta;
+/// use reedbase_last::version::apply_delta;
 /// use std::path::Path;
 ///
 /// apply_delta(
@@ -275,7 +275,7 @@ fn decompress_delta(compressed: &[u8]) -> ReedResult<Vec<u8>> {
 ///
 /// ## Example Usage
 /// ```
-/// use reedbase::version::calculate_savings;
+/// use reedbase_last::version::calculate_savings;
 ///
 /// let saved = calculate_savings(500, 10000);
 /// assert_eq!(saved, 95.0); // 95% savings

@@ -21,7 +21,7 @@ use std::path::Path;
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::tables::list_tables;
+/// use reedbase_last::tables::list_tables;
 /// use std::path::Path;
 ///
 /// let tables = list_tables(Path::new(".reed"))?;
@@ -95,7 +95,7 @@ pub fn table_exists(base_path: &Path, name: &str) -> bool {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::tables::table_stats;
+/// use reedbase_last::tables::table_stats;
 /// use std::path::Path;
 ///
 /// let stats = table_stats(Path::new(".reed"), "text")?;

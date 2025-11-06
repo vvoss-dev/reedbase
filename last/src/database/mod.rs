@@ -20,7 +20,7 @@
 //! ## Quick Start
 //!
 //! ```no_run
-//! use reedbase::database::Database;
+//! use reedbase_last::database::Database;
 //!
 //! // Open database
 //! let db = Database::open(".reed")?;

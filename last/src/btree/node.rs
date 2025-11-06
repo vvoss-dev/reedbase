@@ -86,7 +86,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::InternalNode;
+    /// use reedbase_last::btree::node::InternalNode;
     ///
     /// let node = InternalNode::<String>::new();
     /// assert_eq!(node.keys.len(), 0);
@@ -120,7 +120,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::InternalNode;
+    /// use reedbase_last::btree::node::InternalNode;
     ///
     /// let mut node = InternalNode::new();
     /// node.keys = vec![10, 20, 30];
@@ -166,8 +166,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::InternalNode;
-    /// use reedbase::btree::types::Order;
+    /// use reedbase_last::btree::node::InternalNode;
+    /// use reedbase_last::btree::types::Order;
     ///
     /// let mut node = InternalNode::new();
     /// node.children.push(1); // Initial leftmost child
@@ -218,7 +218,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::InternalNode;
+    /// use reedbase_last::btree::node::InternalNode;
     ///
     /// let mut node = InternalNode::new();
     /// node.keys = vec![10, 20, 30, 40, 50];
@@ -356,7 +356,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::LeafNode;
+    /// use reedbase_last::btree::node::LeafNode;
     ///
     /// let node = LeafNode::<String, Vec<u8>>::new();
     /// assert_eq!(node.keys.len(), 0);
@@ -387,7 +387,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::LeafNode;
+    /// use reedbase_last::btree::node::LeafNode;
     ///
     /// let mut node = LeafNode::new();
     /// node.keys = vec![10, 20, 30];
@@ -424,7 +424,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::LeafNode;
+    /// use reedbase_last::btree::node::LeafNode;
     ///
     /// let mut node = LeafNode::new();
     ///
@@ -483,7 +483,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::node::LeafNode;
+    /// use reedbase_last::btree::node::LeafNode;
     ///
     /// let mut node = LeafNode::new();
     /// node.keys = vec![10, 20, 30, 40];

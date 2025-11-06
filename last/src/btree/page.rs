@@ -206,8 +206,8 @@ impl PageHeader {
 ///
 /// ## Example Usage
 /// ```rust
-/// use reedbase::btree::page::{Page, PAGE_SIZE};
-/// use reedbase::btree::types::PageId;
+/// use reedbase_last::btree::page::{Page, PAGE_SIZE};
+/// use reedbase_last::btree::types::PageId;
 /// use memmap2::MmapMut;
 ///
 /// // Create new internal node page

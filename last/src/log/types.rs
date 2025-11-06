@@ -53,7 +53,7 @@ impl LogEntry {
     ///
     /// ## Example Usage
     /// ```
-    /// use reedbase::log::LogEntry;
+    /// use reedbase_last::log::LogEntry;
     ///
     /// let entry = LogEntry::new(
     ///     1736860900,

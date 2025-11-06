@@ -31,7 +31,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::init_registry;
+/// use reedbase_last::registry::init_registry;
 /// use std::path::Path;
 ///
 /// init_registry(Path::new(".reed"))?;
@@ -140,7 +140,7 @@ fn create_default_user_dict(path: &Path) -> ReedResult<()> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::registry::validate_dictionaries;
+/// use reedbase_last::registry::validate_dictionaries;
 /// use std::path::Path;
 ///
 /// validate_dictionaries(Path::new(".reed"))?;

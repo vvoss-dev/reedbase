@@ -14,7 +14,7 @@
 //!
 //! ## Example Usage
 //! ```rust,ignore
-//! use reedbase::reedql::{parse, QueryAnalyzer};
+//! use reedbase_last::reedql::{parse, QueryAnalyzer};
 //!
 //! let query = parse("SELECT * FROM text WHERE key LIKE 'page.%'")?;
 //! let pattern = QueryAnalyzer::analyze(&query)?;

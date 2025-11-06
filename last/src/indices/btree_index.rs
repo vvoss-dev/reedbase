@@ -18,9 +18,9 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::indices::btree_index::BTreeIndex;
-//! use reedbase::indices::Index;
-//! use reedbase::btree::Order;
+//! use reedbase_last::indices::btree_index::BTreeIndex;
+//! use reedbase_last::indices::Index;
+//! use reedbase_last::btree::Order;
 //!
 //! let order = Order::new(100)?;
 //! let mut index = BTreeIndex::<String, Vec<usize>>::open("namespace.btree", order)?;
@@ -98,8 +98,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::btree_index::BTreeIndex;
-    /// use reedbase::btree::Order;
+    /// use reedbase_last::indices::btree_index::BTreeIndex;
+    /// use reedbase_last::btree::Order;
     ///
     /// let order = Order::new(100)?;
     /// let index = BTreeIndex::<String, Vec<usize>>::open("index.btree", order)?;
@@ -157,8 +157,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{btree_index::BTreeIndex, Index};
-    /// use reedbase::btree::Order;
+    /// use reedbase_last::indices::{btree_index::BTreeIndex, Index};
+    /// use reedbase_last::btree::Order;
     ///
     /// let order = Order::new(100)?;
     /// let mut index = BTreeIndex::<String, Vec<usize>>::open("index.btree", order)?;
@@ -191,8 +191,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{btree_index::BTreeIndex, Index};
-    /// use reedbase::btree::Order;
+    /// use reedbase_last::indices::{btree_index::BTreeIndex, Index};
+    /// use reedbase_last::btree::Order;
     ///
     /// let order = Order::new(100)?;
     /// let mut index = BTreeIndex::<String, Vec<usize>>::open("index.btree", order)?;
@@ -226,8 +226,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{btree_index::BTreeIndex, Index};
-    /// use reedbase::btree::Order;
+    /// use reedbase_last::indices::{btree_index::BTreeIndex, Index};
+    /// use reedbase_last::btree::Order;
     ///
     /// let order = Order::new(100)?;
     /// let mut index = BTreeIndex::<String, Vec<usize>>::open("index.btree", order)?;
@@ -258,8 +258,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{btree_index::BTreeIndex, Index};
-    /// use reedbase::btree::Order;
+    /// use reedbase_last::indices::{btree_index::BTreeIndex, Index};
+    /// use reedbase_last::btree::Order;
     ///
     /// let order = Order::new(100)?;
     /// let mut index = BTreeIndex::<String, Vec<usize>>::open("index.btree", order)?;
@@ -286,8 +286,8 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::indices::{btree_index::BTreeIndex, Index};
-    /// use reedbase::btree::Order;
+    /// use reedbase_last::indices::{btree_index::BTreeIndex, Index};
+    /// use reedbase_last::btree::Order;
     ///
     /// let order = Order::new(100)?;
     /// let mut index = BTreeIndex::<String, Vec<usize>>::open("index.btree", order)?;

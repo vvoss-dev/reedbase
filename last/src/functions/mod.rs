@@ -50,7 +50,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::functions::{computed, aggregations, transformations};
+//! use reedbase_last::functions::{computed, aggregations, transformations};
 //!
 //! // Computed
 //! let age = computed::calculate_age("1990-05-15")?; // "35"
@@ -70,7 +70,7 @@
 //! The global cache can be accessed for statistics and management:
 //!
 //! ```rust
-//! use reedbase::functions::cache::get_cache;
+//! use reedbase_last::functions::cache::get_cache;
 //!
 //! // Get cache statistics
 //! let stats = get_cache().stats();

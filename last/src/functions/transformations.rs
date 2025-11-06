@@ -14,7 +14,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::functions::transformations::{normalize_email, trim, capitalize, slugify};
+//! use reedbase_last::functions::transformations::{normalize_email, trim, capitalize, slugify};
 //!
 //! // Email normalization
 //! let email = normalize_email("  John.Doe@Example.COM  ")?; // "john.doe@example.com"

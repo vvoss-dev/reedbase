@@ -23,7 +23,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::indices::{IndexManager, QueryFilter};
+//! use reedbase_last::indices::{IndexManager, QueryFilter};
 //! use std::path::Path;
 //!
 //! // Build indices

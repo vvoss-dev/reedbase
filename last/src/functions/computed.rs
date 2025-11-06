@@ -14,7 +14,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::functions::computed::{calculate_age, full_name, days_since};
+//! use reedbase_last::functions::computed::{calculate_age, full_name, days_since};
 //!
 //! // Calculate age from birthdate
 //! let age = calculate_age("1990-05-15")?; // "35"

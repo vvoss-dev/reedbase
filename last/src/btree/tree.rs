@@ -41,7 +41,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::btree::{BPlusTree, Order, Index};
+//! use reedbase_last::btree::{BPlusTree, Order, Index};
 //!
 //! // Create or open B+-Tree
 //! let order = Order::new(100)?;
@@ -176,7 +176,7 @@ where
     ///
     /// ## Example
     /// ```rust
-    /// use reedbase::btree::{BPlusTree, Order};
+    /// use reedbase_last::btree::{BPlusTree, Order};
     ///
     /// let order = Order::new(100)?;
     /// let tree = BPlusTree::<String, Vec<u8>>::open("index.btree", order)?;

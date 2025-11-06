@@ -29,7 +29,7 @@ const MAGIC: &str = "REED";
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::{LogEntry, encode_log_entry};
+/// use reedbase_last::log::{LogEntry, encode_log_entry};
 ///
 /// let entry = LogEntry::new(
 ///     1736860900,
@@ -101,7 +101,7 @@ pub fn encode_log_entry(entry: &LogEntry) -> ReedResult<String> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::{LogEntry, encode_log_entries};
+/// use reedbase_last::log::{LogEntry, encode_log_entries};
 ///
 /// let entries = vec![entry1, entry2, entry3];
 /// let encoded = encode_log_entries(&entries)?;
@@ -132,7 +132,7 @@ pub fn encode_log_entries(entries: &[LogEntry]) -> ReedResult<String> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::calculate_size_savings;
+/// use reedbase_last::log::calculate_size_savings;
 ///
 /// let (encoded, plain) = calculate_size_savings(&entries)?;
 /// let savings = ((plain - encoded) as f64 / plain as f64) * 100.0;

@@ -29,7 +29,7 @@
 //! ## Example Usage
 //!
 //! ```rust
-//! use reedbase::schema::rbks::{validate_key, parse_key, normalize_key};
+//! use reedbase_last::schema::rbks::{validate_key, parse_key, normalize_key};
 //!
 //! // Validate a key
 //! validate_key("page.header.title<de,prod>")?;

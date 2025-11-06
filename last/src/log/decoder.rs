@@ -32,7 +32,7 @@ const MAGIC: &str = "REED";
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::decode_log_entry;
+/// use reedbase_last::log::decode_log_entry;
 ///
 /// let line = "REED|00000058|1736860900|2|1|1736860800|2500|15|sha256:abc123|n/a|A1B2C3D4";
 /// let entry = decode_log_entry(line)?;
@@ -252,7 +252,7 @@ fn decode_old_format(parts: &[&str]) -> ReedResult<LogEntry> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::decode_log_entries;
+/// use reedbase_last::log::decode_log_entries;
 ///
 /// let content = std::fs::read_to_string("version.log")?;
 /// let entries = decode_log_entries(&content)?;
@@ -299,7 +299,7 @@ pub fn decode_log_entries(content: &str) -> ReedResult<Vec<LogEntry>> {
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::filter_by_action;
+/// use reedbase_last::log::filter_by_action;
 ///
 /// let updates = filter_by_action(&entries, "update");
 /// println!("Found {} update operations", updates.len());
@@ -323,7 +323,7 @@ pub fn filter_by_action<'a>(entries: &'a [LogEntry], action: &str) -> Vec<&'a Lo
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::filter_by_user;
+/// use reedbase_last::log::filter_by_user;
 ///
 /// let admin_actions = filter_by_user(&entries, "admin");
 /// println!("Admin performed {} actions", admin_actions.len());
@@ -348,7 +348,7 @@ pub fn filter_by_user<'a>(entries: &'a [LogEntry], user: &str) -> Vec<&'a LogEnt
 ///
 /// ## Example Usage
 /// ```no_run
-/// use reedbase::log::filter_by_time_range;
+/// use reedbase_last::log::filter_by_time_range;
 ///
 /// let yesterday = now() - 86400;
 /// let recent = filter_by_time_range(&entries, yesterday, now());
