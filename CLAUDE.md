@@ -349,9 +349,28 @@ cargo watch -c -p reedbase -x test
 ## 📖 Essential Documentation
 
 **Read FIRST in new session**:
-1. **WORKSPACE-CHEATSHEET.md** - Cargo commands, common mistakes
-2. **QS-MATRIX-TEMPLATE.md** - 16 checks per ticket
-3. **REGRESSION-TESTING-PROTOCOL.md** - How to ensure old = new behaviour
+1. **SESSION_HANDOVER.md** - Current status, next steps
+2. **WORKSPACE-CHEATSHEET.md** - Cargo commands, common mistakes
+3. **QS-MATRIX-TEMPLATE.md** - 16 checks per ticket
+4. **REGRESSION-TESTING-PROTOCOL.md** - How to ensure old = new behaviour
+
+### Ticket Creation Process
+
+**⚠️ MANDATORY**: Before creating ANY ticket in `.workbench/tickets/`, read:
+
+```bash
+cat .workbench/tickets/PROCESS_LOGIC.md
+```
+
+This file contains the validated 9-step process for creating Clean Room tickets with:
+- Complete parity verification against `last/src/`
+- Quality checks (Golden Rule, QS-Matrix, BBC English, Regression)
+- Workspace structure updates (paths, commands)
+- Dependency analysis (correct ordering)
+
+**Key principle**: Never trust assumptions - always verify against `last/src/` code.
+
+**Time per ticket**: 30-60 minutes (thorough validation ensures quality)
 
 **Planning Documents**:
 - **000-[CLEANROOM]-00-master-rebuild-plan.md** - Complete rebuild strategy
