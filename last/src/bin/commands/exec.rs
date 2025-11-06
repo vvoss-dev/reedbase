@@ -4,7 +4,7 @@
 //! Exec command implementation.
 
 use anyhow::{Context, Result};
-use reedbase::Database;
+use reedbase_last::Database;
 use std::path::Path;
 
 pub fn execute(sql: &str, path: &Path, user: &str, quiet: bool) -> Result<()> {

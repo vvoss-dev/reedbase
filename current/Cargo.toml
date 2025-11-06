@@ -1,0 +1,35 @@
+[package]
+name = "reedbase"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "A serious database built on 'just CSV files' – with versioning, transactions, and a custom query language that makes it surprisingly fast."
+
+[dependencies]
+# Core dependencies (alphabetically sorted)
+anyhow.workspace = true
+bincode.workspace = true
+bsdiff.workspace = true
+chrono.workspace = true
+clap.workspace = true
+crc32fast.workspace = true
+fs2.workspace = true
+memmap2.workspace = true
+once_cell.workspace = true
+regex.workspace = true
+rustyline.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+uuid.workspace = true
+xz2.workspace = true
+
+[dev-dependencies]
+# Dev dependencies (alphabetically sorted)
+assert_cmd.workspace = true
+criterion.workspace = true
+predicates.workspace = true
+serial_test.workspace = true
+tempfile.workspace = true

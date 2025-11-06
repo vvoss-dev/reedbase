@@ -1,0 +1,56 @@
+# ReedBase v0.2.0-beta Baseline Metrics
+# Generated: 2025-11-06
+# Source: last/ (reedbase-last v0.1.0)
+
+## Test Coverage
+Tests: Running... (timeout during collection, will verify in Phase 1)
+Note: Baseline tests will be established after workspace stabilization
+
+## Code Metrics
+Public Functions: 120
+Documentation Lines: 2901
+Total Source Files: ~50+ .rs files
+
+## File Size Analysis (Top 10 Largest Files)
+1. last/src/btree/tree.rs         : 782 lines  ⚠️ EXCEEDS 400 limit
+2. last/src/btree/btree_test.rs   : 781 lines  ⚠️ EXCEEDS 400 limit (test file)
+3. last/src/reedql/parser.rs      : 730 lines  ⚠️ EXCEEDS 400 limit
+4. last/src/tables/table.rs       : 700 lines  ⚠️ EXCEEDS 400 limit
+5. last/src/reedql/executor.rs    : 697 lines  ⚠️ EXCEEDS 400 limit
+6. last/src/btree/page.rs         : 669 lines  ⚠️ EXCEEDS 400 limit
+7. last/src/database/execute.rs   : 661 lines  ⚠️ EXCEEDS 400 limit
+8. last/src/schema/rbks.rs        : 647 lines  ⚠️ EXCEEDS 400 limit
+9. last/src/btree/node.rs         : 593 lines  ⚠️ EXCEEDS 400 limit
+10. last/src/btree/wal.rs         : 581 lines  ⚠️ EXCEEDS 400 limit
+
+## CLAUDE.md Compliance Status (last/)
+Standard #0 (Code Reuse): ❌ Unknown (no analysis yet)
+Standard #1 (BBC English): ⚠️ Unknown (needs review)
+Standard #2 (KISS <400 lines): ❌ FAILED - 10/10 largest files exceed limit
+Standard #3 (File Naming): ⚠️ Unknown (needs review)
+Standard #4 (One Function = One Job): ⚠️ Unknown (needs review)
+Standard #5 (Separate Test Files): ✅ PARTIAL (btree_test.rs exists, others unknown)
+Standard #6 (No Swiss Army Functions): ⚠️ Unknown (needs review)
+Standard #7 (No Generic Names): ⚠️ Unknown (needs review)
+Standard #8 (NO MVC): ⚠️ Unknown (needs review)
+
+## Rebuild Goals (current/)
+Target: 100% CLAUDE.md compliance
+- All files <400 lines
+- No duplicate functions
+- BBC English throughout
+- Specific naming
+- Separate test files
+- Clean layered architecture
+
+## Workspace Structure
+Packages:
+- reedbase (current/): v0.2.0-beta, Edition 2024, Clean Room implementation
+- reedbase-last (last/): v0.1.0, Edition 2021, Reference baseline
+
+Both packages compile successfully with warnings (acceptable for baseline).
+
+## Next Steps
+1. Phase 1: Implement core/ module (010-[CORE]-01 to 04)
+2. Regression testing: Verify current/ matches last/ behaviour
+3. Quality checks: Enforce all CLAUDE.md standards during rebuild

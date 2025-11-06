@@ -4,7 +4,7 @@
 //! Indices command implementation.
 
 use anyhow::{Context, Result};
-use reedbase::Database;
+use reedbase_last::Database;
 use std::path::Path;
 
 pub fn execute(

@@ -32,8 +32,8 @@ SKIP=0
 echo "📋 Step 1: Test Results Comparison"
 echo "────────────────────────────────────────────────────────────────"
 
-if [ -d "last/current/src/$MODULE" ] && [ -d "current/current/src/$MODULE" ]; then
-    echo "Running tests for last/current/src/$MODULE..."
+if [ -d "last/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
+    echo "Running tests for last/src/$MODULE..."
     OLD_TEST_OUTPUT=$(cargo test -p reedbase-last --lib ${MODULE/\//:} 2>&1 || true)
     OLD_PASS=$(echo "$OLD_TEST_OUTPUT" | grep -oP '\d+(?= passed)' | head -1 || echo "0")
     OLD_FAIL=$(echo "$OLD_TEST_OUTPUT" | grep -oP '\d+(?= failed)' | head -1 || echo "0")
@@ -41,7 +41,7 @@ if [ -d "last/current/src/$MODULE" ] && [ -d "current/current/src/$MODULE" ]; th
     echo "Old: $OLD_PASS passed, $OLD_FAIL failed"
 
     echo "Running tests for current/src/$MODULE..."
-    NEW_TEST_OUTPUT=$(cargo test --lib ${MODULE/\//:} 2>&1 || true)
+    NEW_TEST_OUTPUT=$(cargo test -p reedbase --lib ${MODULE/\//:} 2>&1 || true)
     NEW_PASS=$(echo "$NEW_TEST_OUTPUT" | grep -oP '\d+(?= passed)' | head -1 || echo "0")
     NEW_FAIL=$(echo "$NEW_TEST_OUTPUT" | grep -oP '\d+(?= failed)' | head -1 || echo "0")
 
@@ -56,8 +56,8 @@ if [ -d "last/current/src/$MODULE" ] && [ -d "current/current/src/$MODULE" ]; th
         ((FAIL++))
     fi
 else
-    if [ ! -d "last/current/src/$MODULE" ]; then
-        echo "⚠️  last/current/src/$MODULE not found (new module?)"
+    if [ ! -d "last/src/$MODULE" ]; then
+        echo "⚠️  last/src/$MODULE not found (new module?)"
     fi
     if [ ! -d "current/src/$MODULE" ]; then
         echo "⚠️  current/src/$MODULE not found (not yet implemented?)"
@@ -72,8 +72,8 @@ echo ""
 echo "📋 Step 2: Public API Comparison"
 echo "────────────────────────────────────────────────────────────────"
 
-if [ -d "last/current/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
-    OLD_API=$(rg "^pub fn \w+" last/current/src/$MODULE/ -o --no-filename 2>/dev/null | sort | uniq || echo "")
+if [ -d "last/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
+    OLD_API=$(rg "^pub fn \w+" last/src/$MODULE/ -o --no-filename 2>/dev/null | sort | uniq || echo "")
     NEW_API=$(rg "^pub fn \w+" current/src/$MODULE/ -o --no-filename 2>/dev/null | sort | uniq || echo "")
 
     OLD_COUNT=$(echo "$OLD_API" | grep -c "pub fn" || echo "0")
@@ -122,8 +122,8 @@ echo ""
 echo "📋 Step 3: Documentation Coverage"
 echo "────────────────────────────────────────────────────────────────"
 
-if [ -d "last/current/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
-    OLD_DOCS=$(rg "^///|^//!" last/current/src/$MODULE/ 2>/dev/null | wc -l || echo "0")
+if [ -d "last/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
+    OLD_DOCS=$(rg "^///|^//!" last/src/$MODULE/ 2>/dev/null | wc -l || echo "0")
     NEW_DOCS=$(rg "^///|^//!" current/src/$MODULE/ 2>/dev/null | wc -l || echo "0")
 
     OLD_DOCS=$(echo "$OLD_DOCS" | tr -d ' ')
@@ -153,11 +153,11 @@ echo ""
 echo "📋 Step 4: Type Definitions Check"
 echo "────────────────────────────────────────────────────────────────"
 
-if [ -d "last/current/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
-    OLD_STRUCTS=$(rg "^pub struct \w+" last/current/src/$MODULE/ -o --no-filename 2>/dev/null | sort || echo "")
+if [ -d "last/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
+    OLD_STRUCTS=$(rg "^pub struct \w+" last/src/$MODULE/ -o --no-filename 2>/dev/null | sort || echo "")
     NEW_STRUCTS=$(rg "^pub struct \w+" current/src/$MODULE/ -o --no-filename 2>/dev/null | sort || echo "")
 
-    OLD_ENUMS=$(rg "^pub enum \w+" last/current/src/$MODULE/ -o --no-filename 2>/dev/null | sort || echo "")
+    OLD_ENUMS=$(rg "^pub enum \w+" last/src/$MODULE/ -o --no-filename 2>/dev/null | sort || echo "")
     NEW_ENUMS=$(rg "^pub enum \w+" current/src/$MODULE/ -o --no-filename 2>/dev/null | sort || echo "")
 
     STRUCTS_MATCH="yes"
@@ -201,8 +201,8 @@ echo ""
 echo "📋 Step 5: Test File Presence"
 echo "────────────────────────────────────────────────────────────────"
 
-if [ -d "last/current/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
-    OLD_TEST_FILES=$(find last/current/src/$MODULE -name "*_test.rs" -o -name "*test.rs" | wc -l)
+if [ -d "last/src/$MODULE" ] && [ -d "current/src/$MODULE" ]; then
+    OLD_TEST_FILES=$(find last/src/$MODULE -name "*_test.rs" -o -name "*test.rs" | wc -l)
     NEW_TEST_FILES=$(find current/src/$MODULE -name "*_test.rs" -o -name "*test.rs" | wc -l)
 
     OLD_TEST_FILES=$(echo "$OLD_TEST_FILES" | tr -d ' ')
@@ -253,7 +253,7 @@ if [ "$FAIL" -eq 0 ]; then
     else
         echo "✅ REGRESSION CHECK PASSED"
         echo ""
-        echo "Module $MODULE maintains behaviour compatibility with last/current/src/"
+        echo "Module $MODULE maintains behaviour compatibility with last/src/"
         exit 0
     fi
 else

@@ -4,7 +4,7 @@
 //! Interactive shell (REPL) implementation.
 
 use anyhow::{Context, Result};
-use reedbase::Database;
+use reedbase_last::Database;
 use rustyline::error::ReadlineError;
 use rustyline::DefaultEditor;
 use std::path::Path;

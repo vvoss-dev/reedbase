@@ -18,7 +18,7 @@
 //! cargo run --bin generate_fixtures
 //! ```
 
-use reedbase::Database;
+use reedbase_last::Database;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -144,8 +144,8 @@ fn generate_versioned_fixture(base_path: &Path) -> anyhow::Result<()> {
     let db_path = fixture_path.join(".reed");
 
     // Initialize registry
-    reedbase::registry::init_registry(&db_path)?;
-    reedbase::registry::set_base_path(db_path.clone());
+    reedbase_last::registry::init_registry(&db_path)?;
+    reedbase_last::registry::set_base_path(db_path.clone());
 
     // Create database
     let db = Database::open(&db_path)?;
@@ -185,8 +185,8 @@ fn generate_versioned_fixture(base_path: &Path) -> anyhow::Result<()> {
 /// Creates a database with specified number of rows.
 fn create_database_with_rows(db_path: &Path, rows: usize) -> anyhow::Result<()> {
     // Initialize registry
-    reedbase::registry::init_registry(db_path)?;
-    reedbase::registry::set_base_path(db_path.to_path_buf());
+    reedbase_last::registry::init_registry(db_path)?;
+    reedbase_last::registry::set_base_path(db_path.to_path_buf());
 
     // Create database
     let db = Database::open(db_path)?;

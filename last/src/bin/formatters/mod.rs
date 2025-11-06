@@ -3,7 +3,7 @@
 
 //! Output formatters for query results.
 
-use reedbase::reedql::QueryResult;
+use reedbase_last::reedql::QueryResult;
 
 /// Formats result as human-readable table.
 pub fn format_table(result: &QueryResult) -> String {
